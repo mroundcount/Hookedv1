@@ -100,6 +100,7 @@ class UsersAroundViewController: UIViewController {
         
         Api.User.observeUsers { (user) in
             self.users.append(user)
+            self.collectionView.reloadData()
             return
             }
         /*
@@ -151,6 +152,7 @@ extension UsersAroundViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserAroundCollectionViewCell", for: indexPath) as! UserAroundCollectionViewCell
         let user = users[indexPath.item]
+
         cell.controller = self
         //cell.loadData(user)
         cell.loadData(user, currentLocation: self.currentLocation)
@@ -165,6 +167,8 @@ extension UsersAroundViewController: UICollectionViewDelegate, UICollectionViewD
             let detailVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_DETAIL) as! DetailViewController
             detailVC.user = cell.user
          
+            print("run")
+            
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
@@ -229,26 +233,6 @@ extension UsersAroundViewController: CLLocationManagerDelegate {
         }
     }
 }
-
-
-
-
-/*
-extension UsersAroundViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserAroundCollectionViewCell", for: indexPath) as! UserAroundCollectionViewCell
-        cell.avatar.image = UIImage(named: "taylor_swift")
-        cell.ageLbl.text = "30"
-        cell.distanceLbl.text = "23 km"
-        
-        return cell
-    }
-}
-*/
-
 
 
 /*

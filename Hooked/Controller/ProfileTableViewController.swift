@@ -24,7 +24,6 @@ class ProfileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         observeData()
         setupView()
         setUpAvatar()

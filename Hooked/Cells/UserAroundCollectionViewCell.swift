@@ -50,7 +50,6 @@ class UserAroundCollectionViewCell: UICollectionViewCell {
         } else {
             distanceLbl.text = ""
         }
- 
     }
     //manage the business logic of observer methods
     override func prepareForReuse() {

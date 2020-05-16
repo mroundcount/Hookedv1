@@ -103,7 +103,7 @@ class Card: UIView {
      }
      //switch to the detail view for each card
      @IBAction func infoBtnDidTap(_ sender: Any) {
-         let storyboard = UIStoryboard(name: "Welcome", bundle: nil)
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
          let detailVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_DETAIL) as! DetailViewController
          detailVC.user = user
          

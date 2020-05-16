@@ -20,6 +20,8 @@ class UserTableViewCell: UITableViewCell {
     
     var user: User!
     var delegate: UpdateTableProtocol!
+    var controller: PeopleTableViewController!
+
     
     override func awakeFromNib() {
     super.awakeFromNib()
@@ -30,6 +32,11 @@ class UserTableViewCell: UITableViewCell {
     }
     //Refer to the userAPI
     func loadData(_ user: User) {
+        
+        
+        self.user = user
+        //self.ageLbl.text = user.username
+        
         self.usernameLbl.text = user.username
         self.statusLbl.text = user.status
         //passing the url to the method

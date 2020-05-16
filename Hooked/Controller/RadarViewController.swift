@@ -39,7 +39,7 @@ class RadarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "JChat"
+        title = "Hooked"
         configureLocationManager()
         nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
@@ -166,13 +166,13 @@ class RadarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = false
-        tabBarController?.tabBar.isHidden = true
+        //tabBarController?.tabBar.isHidden = true
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
-        tabBarController?.tabBar.isHidden = false
+        //tabBarController?.tabBar.isHidden = false
     }
     
     //confifure the card frame and pass in the user parameter and append it to the card array

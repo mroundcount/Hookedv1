@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 //add in the UISearchResultsUpdating class
 class PeopleTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var users: [User] = []
+    var user: User!
+
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     //search thru the array of users
     var searchResults: [User] = []
+    var controller: PeopleTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,29 +102,31 @@ class PeopleTableViewController: UITableViewController, UISearchResultsUpdating 
         //short handed version of the same if logic above
         let user = searchController.isActive ? searchResults[indexPath.row] : users[indexPath.row]
         //display the data encoded in each element of the user array
+        cell.controller = self
+
         cell.delegate = self
         cell.loadData(user)
         
         return cell
     }
+    
+    //my experiment to navigate to the profile of a user tapped..... incomplete
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         if let cell = tableView.cellForRow(at: indexPath) as? UserTableViewCell {
+             
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+             let detailVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_DETAIL) as! DetailViewController
+            detailVC.user = cell.user
+             print("run")
+
+             self.navigationController?.pushViewController(detailVC, animated: true)
+         }
+     }
+    
     //hard coding in the size of the cell.
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 94
     }
-    
-    //my experiment to navigate to the profile of a user tapped..... incomplete
-    /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? UserTableViewCell {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let detailVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_DETAIL) as! DetailViewController
-                  //detailVC.user = cell.user
-               
-            self.navigationController?.pushViewController(detailVC, animated: true)
-        }
-    }
- */
-
 }
 
 extension PeopleTableViewController: UpdateTableProtocol {

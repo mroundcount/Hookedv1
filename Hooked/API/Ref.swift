@@ -12,6 +12,9 @@ import Firebase
 
 //All of our firebase related references. We'll assign one for every node. This was we do not have to hardcode elsewhere
 let REF_USER = "users"
+let REF_MESSAGE = "messages"
+let REF_AUDIO = "audio"
+
 let URL_STORAGE_ROOT = "gs://hooked-217d3.appspot.com"
 let STORAGE_PROFILE = "profile"
 let PROFILE_IMAGE_URL = "profileImageUrl"
@@ -19,6 +22,7 @@ let UID = "uid"
 let EMAIL = "email"
 let USERNAME = "username"
 let STATUS = "status"
+
 let ERROR_EMPTY_PHOTO = "Please choose your profile image"
 let ERROR_EMPTY_EMAIL = "Please enter an email address"
 let ERROR_EMPTY_USERNAME = "Please enter a username"
@@ -29,9 +33,12 @@ let SUCCESS_EMAIL_RESET = "We have just resent you a password reset email. Pleas
 
 let IDENTIFIER_TABBAR = "TabBarVC"
 let IDENTIFIER_WELCOME = "WelcomeVC"
+let IDENTIFIER_CHAT = "ChatViewController"
 
 let IDENTIFIER_USER_AROUND = "UsersAroundViewController"
 let IDENTIFIER_CELL_USERS = "UserTableViewCell"
+let IDENTIFIER_PEOPLE = "PeopleTableViewController"
+let IDENTIFIER_UPLOAD = "UploadTableViewController"
 
 let REF_GEO = "Geolocs"
 
@@ -40,6 +47,13 @@ let IDENTIFIER_DETAIL = "DetailViewController"
 let IDENTIFIER_RADAR = "RadarViewController"
 let IDENTIFIER_NEW_MATCH = "NewMatchTableViewController"
 let REF_ACTION = "action"
+let REF_LIKES = "likes"
+
+
+
+
+
+
 
 class Ref {
     let databaseRoot: DatabaseReference = Database.database().reference()
@@ -77,6 +91,60 @@ class Ref {
           return databaseAction.child(uid)
       }
     
+    //adding in the new tables for just likes
+    var databaseLikes: DatabaseReference {
+         return databaseRoot.child(REF_LIKES)
+     }
+     //adding in the new tables for just likes
+     func databaseLikesForUser(uid: String) -> DatabaseReference {
+           return databaseLikes.child(uid)
+    }
+    
+    
+    
+    var databaseMessage: DatabaseReference {
+        return databaseRoot.child(REF_MESSAGE)
+    }
+    
+    func databaseMessageSendTo(from: String /*,to: String*/) -> DatabaseReference {
+        return databaseMessage.child(from)/*.child(to)*/
+    }
+    
+    var storageMessage: StorageReference {
+        return storageRoot.child(REF_MESSAGE)
+    }
+    
+    
+    func storageSpecificImageMessage(id: String) -> StorageReference {
+        return storageMessage.child("photo").child(id)
+    }
+    
+    func storageSpecificVideoMessage(id: String) -> StorageReference {
+        return storageMessage.child("video").child(id)
+    }
+    
+    func storageSpecificAudioMessage(id: String) -> StorageReference {
+        return storageMessage.child("audio").child(id)
+    }
+    
+    
+    
+    var databaseAudio: DatabaseReference {
+        return databaseRoot.child(REF_AUDIO)
+    }
+    
+    func databaseAudioArtist(artist: String) -> DatabaseReference {
+        return databaseMessage.child(artist)
+    }
+    
+    var storageAudio: StorageReference {
+        return storageRoot.child(REF_AUDIO)
+    }
+    
+    func storageSpecificAudio(id: String) -> StorageReference {
+        print("from final audio")
+        return storageAudio.child("audio").child(id)
+    }
 }
 
 

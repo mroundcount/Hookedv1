@@ -20,6 +20,8 @@ class DetailViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   var user: User!
+  var users: [User] = []
+    
  // var isMatch = false
 
 override func viewDidLoad() {
