@@ -10,7 +10,7 @@ import UIKit
 import ProgressHUD
 
 extension SignInViewController {
-
+    
     func setUpTitleTextLbl() {
         let title = "Sign In"
         //copy over from ViewController+UI
@@ -18,20 +18,20 @@ extension SignInViewController {
         
         titleTextLbl.attributedText = attributedText
     }
-
-
+    
+    
     func setUpEmailTxt() {
         //copy over from signUpViewController+UI
         emailContainerView.layer.borderWidth = 1
         emailContainerView.layer.borderColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1).cgColor
         emailContainerView.layer.cornerRadius = 3
         emailContainerView.clipsToBounds = true
-        emailTxt.borderStyle = .none
+        emailTextField.borderStyle = .none
         
         let placeholderAttr = NSAttributedString(string: "Email Address", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         
-        emailTxt.attributedPlaceholder = placeholderAttr
-        emailTxt.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
+        emailTextField.attributedPlaceholder = placeholderAttr
+        emailTextField.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
         
     }
     
@@ -41,12 +41,12 @@ extension SignInViewController {
         passwordContainerView.layer.cornerRadius = 3
         passwordContainerView.clipsToBounds = true
         
-        passwordTxt.borderStyle = .none
+        passwordTextField.borderStyle = .none
         
         let placeholderAttr = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor : UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1)])
         
-        passwordTxt.attributedPlaceholder = placeholderAttr
-        passwordTxt.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
+        passwordTextField.attributedPlaceholder = placeholderAttr
+        passwordTextField.textColor = UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)
     }
     
     func setUpSignInBtn() {
@@ -70,11 +70,11 @@ extension SignInViewController {
     
     func validateFields() {
         //copied from signUpViewController+UI
-        guard let email = self.emailTxt.text, !email.isEmpty else {
+        guard let email = self.emailTextField.text, !email.isEmpty else {
             ProgressHUD.showError(ERROR_EMPTY_EMAIL)
             return
         }
-        guard let password = self.passwordTxt.text, !password.isEmpty else {
+        guard let password = self.passwordTextField.text, !password.isEmpty else {
             ProgressHUD.showError(ERROR_EMPTY_PASSWORD)
             return
         }
@@ -82,11 +82,11 @@ extension SignInViewController {
     //copied from SignUp
     func signIn(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         ProgressHUD.show("Loading...")
-        Api.User.signIn(email: self.emailTxt.text!, password: passwordTxt.text!, onSuccess: {
+        Api.User.signIn(email: self.emailTextField.text!, password: passwordTextField.text!, onSuccess: {
             ProgressHUD.dismiss()
             onSuccess()
-        }) { (errorMesssage) in
-            onError(errorMesssage)
+        }) { (errorMessage) in
+            onError(errorMessage)
         }
     }
 }

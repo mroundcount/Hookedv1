@@ -11,12 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import ProgressHUD
-import CoreLocation
-import GeoFire
 
 class SignUpViewController: UIViewController {
     
-
     @IBOutlet weak var titleTextLbl: UILabel!
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var usernameContainerView: UIView!
@@ -30,16 +27,9 @@ class SignUpViewController: UIViewController {
     
     //getting the users current location. Store these locally 
     var image: UIImage? = nil
-    var manager = CLLocationManager()
-    var userLat = ""
-    var userLong = ""
-    var geoFire: GeoFire!
-    var geoFireRef: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureLocationManager()
         setUpUI()
     }
 
@@ -63,31 +53,10 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpBtnDidTap(_ sender: Any) {
         self.view.endEditing(true)
         self.validateFields()
-        //sending the current location up to the database
-        //creating the key for coordinate location
-        if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String, let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
-            //storing them to the variables
-            self.userLat = userLat
-            self.userLong = userLong
-        }
-        
-        
         self.signUp(onSuccess: {
-            //assign to a string to send to the database
-            if !self.userLat.isEmpty && !self.userLong.isEmpty {
-                //convert the string to CL location for the parameters to push
-                 let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(self.userLat)!), longitude: CLLocationDegrees(Double(self.userLong)!))
-                //set to the geofire database
-                self.geoFireRef = Ref().databaseGeo
-                self.geoFire = GeoFire(firebaseRef: self.geoFireRef)
-                self.geoFire.setLocation(location, forKey: Api.User.currentUserId)
-            }
-            //switch view
              (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
         }) { (errorMessage) in
             ProgressHUD.showError(errorMessage)
         }
-        
     }
-    
 }

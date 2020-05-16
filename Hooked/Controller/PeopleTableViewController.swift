@@ -42,21 +42,13 @@ class PeopleTableViewController: UITableViewController, UISearchResultsUpdating 
     }
     
     func setupNavigationBar() {
-        //title and styling for the navigation bar
-        navigationItem.title = "People"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        title = "All People"
         
-        let location = UIBarButtonItem(image: UIImage(named: "icon-location"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(locationDidTapped))
-        navigationItem.leftBarButtonItem = location
+        let iconView = UIImageView(image: UIImage(named: "icon_top"))
+        iconView.contentMode = .scaleAspectFit
+        navigationItem.titleView = iconView
     }
-    
-   @objc func locationDidTapped() {
-       // switch to UsersAroundVC
-       let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_USER_AROUND) as! UsersAroundViewController
-       self.navigationController?.pushViewController(usersAroundVC, animated: true)
-   }
-    
+
     func observeUsers() {
         //returns a snapshot of each user
         Api.User.observeUsers { (user) in
@@ -110,14 +102,12 @@ class PeopleTableViewController: UITableViewController, UISearchResultsUpdating 
         return cell
     }
     
-    //my experiment to navigate to the profile of a user tapped..... incomplete
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          if let cell = tableView.cellForRow(at: indexPath) as? UserTableViewCell {
              
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
              let detailVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_DETAIL) as! DetailViewController
             detailVC.user = cell.user
-             print("run")
 
              self.navigationController?.pushViewController(detailVC, animated: true)
          }

@@ -32,6 +32,9 @@ class ViewController: UIViewController {
         setUpCreateAccountBtn()
         setUpTermsLabel()
     }
-
+    
+    @objc func labelTapped(_ sender: UITapGestureRecognizer) {
+        print("labelTapped")
+    }
 }
 

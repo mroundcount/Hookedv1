@@ -38,6 +38,7 @@ let IDENTIFIER_CHAT = "ChatViewController"
 let IDENTIFIER_USER_AROUND = "UsersAroundViewController"
 let IDENTIFIER_CELL_USERS = "UserTableViewCell"
 let IDENTIFIER_PEOPLE = "PeopleTableViewController"
+let IDENTIFIER_EDIT_PROFILE = "ProfileTableViewController"
 let IDENTIFIER_UPLOAD = "UploadTableViewController"
 
 let REF_GEO = "Geolocs"
@@ -128,13 +129,13 @@ class Ref {
     }
     
     
-    
+    //Uploading just audio files
     var databaseAudio: DatabaseReference {
         return databaseRoot.child(REF_AUDIO)
     }
     
     func databaseAudioArtist(artist: String) -> DatabaseReference {
-        return databaseMessage.child(artist)
+        return databaseAudio.child(artist)
     }
     
     var storageAudio: StorageReference {
@@ -143,7 +144,7 @@ class Ref {
     
     func storageSpecificAudio(id: String) -> StorageReference {
         print("from final audio")
-        return storageAudio.child("audio").child(id)
+        return storageAudio.child(id)
     }
 }
 

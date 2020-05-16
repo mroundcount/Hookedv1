@@ -89,6 +89,11 @@ class ProfileTableViewController: UITableViewController {
         Api.User.logOut()
     }
     
+    @IBAction func backBtnDidTap(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func saveBtnDidTap(_ sender: Any) {
         ProgressHUD.show("Loading...")
         

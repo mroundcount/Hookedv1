@@ -18,8 +18,7 @@ class UserApi {
     var currentUserId: String {
         return Auth.auth().currentUser != nil ? Auth.auth().currentUser!.uid : ""
     }
-
-
+    
     func signIn(email: String, password: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         //This is specifically for email and password. There are other built in tools in Auth
         Auth.auth().signIn(withEmail: email, password: password) {
@@ -32,6 +31,8 @@ class UserApi {
             onSuccess()
         }
     }
+
+    
     //function with the input parameters we need to pass in. We need all this info from the signUpView controller and now we need to pass all the parameters into this method
     func signUp(withUsername username: String, email: String, password: String, image: UIImage?, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         //firebase authentication. Create user methed creates an account. Result and error are object receieved from firebase after the creation process.
@@ -60,7 +61,7 @@ class UserApi {
                 guard let imageData = imageSelected.jpegData(compressionQuality: 0.4) else {
                     return
                 }
-
+                
                 let storageProfile = Ref().storageSpecificProfile(uid: authData.user.uid)
                 //upload the image data to Firebase.
                 let metadata = StorageMetadata()
@@ -100,7 +101,7 @@ class UserApi {
             }
         }
     }
-        
+    
     func logOut() {
         //user the built in FirebaseAuth functions
         do {
@@ -128,16 +129,39 @@ class UserApi {
         }
     }
     
-    
     func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
-             guard let dict = snapshot.value as? [String: Bool] else { return }
-             dict.forEach({ (key, value) in
-                 self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
-                     onSuccess(user)
-                 })
-             })
-         }
-     }
+        guard let dict = snapshot.value as? [String: Bool] else { return }
+        dict.forEach({ (key, value) in
+            self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
+                onSuccess(user)
+            })
+        })
+        }
+    }
+    
+    //Returns all users that the current user has liked
+    func observeNewLike(onSuccess: @escaping(UserCompletion)) {
+        Ref().databaseRoot.child("likes").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Bool] else { return }
+            dict.forEach({ (key, value) in
+                self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
+                    onSuccess(user)
+                })
+            })
+        }
+    }
+    
+    func observeAction(onSuccess: @escaping(UserCompletion)) {
+        Ref().databaseRoot.child("action").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Bool] else { return }
+            dict.forEach({ (key, value) in
+                self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
+                    onSuccess(user)
+                })
+            })
+        }
+    }
+    
     
     //For data that only needs to be changed one or infrequently (ie profile photos)
     //prevents cetrain loadings from happening multiple times like when we changed the profile photo in video 50

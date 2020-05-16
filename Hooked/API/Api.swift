@@ -11,4 +11,6 @@ import Foundation
 struct Api {
     //We will put all business logic and methods of the user business services (create user, sign in, etc.)
     static var User = UserApi()
+    static var Audio = AudioApi()
+    static var Message = MessageApi()
 }

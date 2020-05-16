@@ -14,9 +14,10 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var titleTextLbl: UILabel!
     @IBOutlet weak var emailContainerView: UIView!
-    @IBOutlet weak var emailTxt: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var passwordContainerView: UIView!
-    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpBtn: UIButton!
     @IBOutlet weak var signInBtn: UIButton!
     @IBOutlet weak var forgotPasswordBtn: UIButton!
@@ -33,7 +34,6 @@ class SignInViewController: UIViewController {
         setUpPasswordTxt()
         setUpSignUpBtn()
         setUpSignInBtn()
-      //setUpforgotPasswordBtn()
     }
     
     //Dismissing the view and navigate back to the welcome in scene
@@ -53,5 +53,4 @@ class SignInViewController: UIViewController {
             ProgressHUD.showError(errorMessage)
         }
     }
-    
 }

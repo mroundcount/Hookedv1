@@ -43,13 +43,17 @@ extension ViewController {
     func setUpTermsLabel() {
         let attributedTermsText = NSMutableAttributedString(string: "By clicking 'Create a new account' you agree to our ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.65)])
         
-        let attributedTermsSubTitle = NSMutableAttributedString(string: "Terms of Service", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.45)])
+        let attributedTermsSubTitle = NSMutableAttributedString(string: "Terms of Service", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor.black])
         
         //The combination of the two attributed texts
         attributedTermsText.append(attributedTermsSubTitle)
         
         termsOfServiceLbl.attributedText = attributedTermsText
         termsOfServiceLbl.numberOfLines = 0
+        
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+        self.termsOfServiceLbl.isUserInteractionEnabled = true
+        self.termsOfServiceLbl.addGestureRecognizer(labelTap)
     }
     
     
@@ -71,7 +75,7 @@ extension ViewController {
     }
     
     func setUpGoogleBtn() {
-        signInGoogleBtn.setTitle("Sign in with Google", for: UIControl.State.normal)
+        signInGoogleBtn.setTitle("Sign in with email", for: UIControl.State.normal)
         signInGoogleBtn.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         signInGoogleBtn.backgroundColor = UIColor(red: 223/255, green: 74/255, blue: 50/255, alpha: 1)
         signInGoogleBtn.layer.cornerRadius = 5

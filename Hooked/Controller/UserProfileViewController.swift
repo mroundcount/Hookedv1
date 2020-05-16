@@ -9,22 +9,120 @@
 import UIKit
 
 class UserProfileViewController: UIViewController {
-
+    
+    @IBOutlet weak var ageLbl: UILabel!
+    @IBOutlet weak var genderImage: UIImageView!
+    @IBOutlet weak var usernameLbl: UILabel!
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var uploadBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var user: User!
+    var users: [User] = []
+    var audio = [Audio]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        observeData()
+ 
+        uploadBtn.layer.cornerRadius = 5
+        uploadBtn.clipsToBounds = true
+        
+        avatar.clipsToBounds = true
+        let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 350)
+        avatar.addBlackGradientLayer(frame: frameGradient, colors: [.clear, .black])
+        
+        //removing the white menu at the top by hiding the same area.
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.dataSource = self
+        tableView.delegate = self
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func uploadBtnDidPress(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_UPLOAD) as! UploadTableViewController
+        self.navigationController?.pushViewController(usersAroundVC, animated: true)
     }
-    */
+    
+    @IBAction func optionsBtnDidPress(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_EDIT_PROFILE) as! ProfileTableViewController
+        self.navigationController?.pushViewController(usersAroundVC, animated: true)
+    }
+    
+    
+    func observeData() {
+        //fetching current user data
+        Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
+            self.usernameLbl.text = user.username
+            self.avatar.loadImage(user.profileImageUrl)
+            //adding age and genedner to the user model. These are editable and push to the database
+            if let age = user.age {
+                self.ageLbl.text = "\(age)"
+            } else {
+                self.ageLbl.text = "Optional"
+            }
+        }
+        Api.Audio.pullAudio(artist: Api.User.currentUserId) { (audio) in
+            self.audio.append(audio)
+            self.sortAudio()
+            print("calling audiofile: ")
+            print(audio.artist)
+            print(audio.title)
+            print(audio.genre)
+            print(audio.date)
+            print(audio.audioUrl)
+            print("done")
+        }
+    }
+    
+    func sortAudio() {
+        audio = audio.sorted(by: { $0.date < $1.date })
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    //Hide the navigation bar
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    //unhide the navigation bar
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+}
 
+
+extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(audio.count)
+        return audio.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell") as! AudioTableViewCell
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell", for: indexPath) as! AudioTableViewCell
+        cell.playButton.isHidden = audio[indexPath.row].audioUrl == ""
+        cell.configureCell(uid: Api.User.currentUserId, audio: audio[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+        //copy this and add the variables in the return with "delete
+        let delete = UITableViewRowAction(style: .normal, title: "      Delete     ") { action, index in
+            let cell = tableView.cellForRow(at: editActionsForRowAt) as? AudioTableViewCell
+            print("Removed \(cell?.audio.title)")
+        }
+        delete.backgroundColor = .red
+        return [delete]
+    }
 }

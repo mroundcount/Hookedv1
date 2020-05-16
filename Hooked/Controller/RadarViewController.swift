@@ -14,16 +14,13 @@ import ProgressHUD
 
 class RadarViewController: UIViewController {
     
-    let manager = CLLocationManager()
-    var userLat = ""
-    var userLong = ""
-    var geoFire: GeoFire!
-    var geoFireRef: DatabaseReference!
     var myQuery: GFQuery!
     var queryHandle: DatabaseHandle?
-    var distance: Double = 500
     var users: [User] = []
     var cards: [Card] = []
+    var likes = [String]()
+    var allUsers = [String]()
+    var final = [String]()
     //detecting the position of the card at it's inital position
     var cardInitialLocationCenter: CGPoint!
     var panInitialLocation: CGPoint!
@@ -34,13 +31,15 @@ class RadarViewController: UIViewController {
     @IBOutlet weak var superLikeImg: UIImageView!
     @IBOutlet weak var likeImg: UIImageView!
     @IBOutlet weak var boostImg: UIImageView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.findUsers()
+        
         title = "Hooked"
-        configureLocationManager()
+        //configureLocationManager()
         nopeImg.isUserInteractionEnabled = true
         let tapNopeImg = UITapGestureRecognizer(target: self, action: #selector(nopeImgDidTap))
         nopeImg.addGestureRecognizer(tapNopeImg)
@@ -51,6 +50,42 @@ class RadarViewController: UIViewController {
         
         let newMatchItem = UIBarButtonItem(image: UIImage(named: "icon-chat"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(newMatchItemDidTap))
         self.navigationItem.rightBarButtonItem = newMatchItem
+        
+        findAction()
+        //print(users)
+    }
+    
+    //copying the function from the people around view controller. May update this later once we can get the observation fixed
+        
+    func findAction() {
+        Api.User.observeAction { (user) in
+            //self.users.removeAll()
+            self.users.append(user)
+            self.setupCard(user: user)
+            print("action database:",user.username)
+            Ref().databaseRoot.child("action").child(Api.User.currentUserId).updateChildValues([user.uid: true])
+            return
+        }
+    }
+    
+    
+    func findUsers () {
+        
+         Api.User.observeNewLike { (user) in
+         //self.users.removeAll()
+         self.users.append(user)
+         //print("liked users: ",user.username)
+         //self.likes.append(user.username)
+         //print("already liked users:",self.likes)
+         }
+        
+        Api.User.observeUsers { (user) in
+            //self.users.removeAll()
+            self.users.append(user)                        
+            self.setupCard(user: user)
+            //print(user.username)
+            return
+        }
         
     }
     
@@ -68,7 +103,7 @@ class RadarViewController: UIViewController {
         //save it to the firstbase
         saveToFirebase(like: false, card: firstCard)
         swipeAnimation(translation: -750, angle: -15)
-        self.setupTransforms()
+        //self.setupTransforms()
     }
     
     //creating swipe animation
@@ -79,8 +114,10 @@ class RadarViewController: UIViewController {
         //move the card to the right
         //save it to the firstbase
         saveToFirebase(like: true, card: firstCard)
+        //only saving likes to the liked table
+        saveLikesToFirebase(like: true, card: firstCard)
         swipeAnimation(translation: 750, angle: 15)
-        self.setupTransforms()
+        //self.setupTransforms()
     }
     
     //saving the true of false to the current user logged in
@@ -94,20 +131,27 @@ class RadarViewController: UIViewController {
         }
     }
     
+    //saving only true like values to the firebase so can can just view them in a liked page.
+    func saveLikesToFirebase(like: Bool, card: Card) {
+        Ref().databaseLikesForUser(uid: Api.User.currentUserId)
+            .updateChildValues([card.user.uid: like]) { (error, ref) in
+                if error == nil, like == true {
+                }
+        }
+    }
+    
     //looking for a match checked by userID
     func checkIfMatchFor(card: Card) {
+        //pull all the swiping information on the card userID
         Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
+            //looking if this card contains the true value for the current userID
             guard let dict = snapshot.value as? [String: Bool] else { return }
             //logic for checking if both users like each other.
+            //looking if the user logged in also has a liked value from the user on the card
             if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
-                // send push notification
-            Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
-            Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-                /*
-                Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId, onSuccess: { (user) in
-                    sendRequestNotification(isMatch: true, fromUser: user, toUser: card.user, message: "Tap to chat with \(user.username)", badge: 1)
-                      sendRequestNotification(isMatch: true, fromUser: card.user, toUser: user, message: "Tap to chat with \(card.user.username)", badge: 1)
-                })*/
+                Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
+                Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
+                
             }
         }
     }
@@ -148,27 +192,13 @@ class RadarViewController: UIViewController {
         CATransaction.commit()
     }
     
-    func configureLocationManager() {
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.distanceFilter = kCLDistanceFilterNone
-        manager.pausesLocationUpdatesAutomatically = true
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            manager.startUpdatingLocation()
-        }
-        
-        self.geoFireRef = Ref().databaseGeo
-        self.geoFire = GeoFire(firebaseRef: self.geoFireRef)
-    }
-    
     //diabling the title area and the navigation bar the bottom
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = false
         //tabBarController?.tabBar.isHidden = true
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -187,7 +217,7 @@ class RadarViewController: UIViewController {
         cardStack.addSubview(card)
         cardStack.sendSubviewToBack(card)
         //allows us to see the full stack of the cards.
-        setupTransforms()
+        //setupTransforms()
         
         //make sure that only the top card is being interacted with
         if cards.count == 1 {
@@ -205,16 +235,13 @@ class RadarViewController: UIViewController {
         switch gesture.state {
         case .began:
             panInitialLocation = gesture.location(in: cardStack)
-            print("began")
-            print("panInitialLocation")
-            print(panInitialLocation)
-
+            
         //look where the card is moving in the gesture
         case .changed:
-            print("changed")
-            print("x: \(translation.x)")
-            print("y: \(translation.y)")
-
+            //print("changed")
+            //print("x: \(translation.x)")
+            //print("y: \(translation.y)")
+            
             card.center.x = cardInitialLocationCenter.x + translation.x
             card.center.y = cardInitialLocationCenter.y + translation.y
             
@@ -243,9 +270,11 @@ class RadarViewController: UIViewController {
                     card.removeFromSuperview()
                 }
                 saveToFirebase(like: true, card: card)
+                //only saving likes to the liked table
+                saveLikesToFirebase(like: true, card: card)
                 //apply the same logic to the next card in the stact
                 self.updateCards(card: card)
-
+                
                 return
             } else if translation.x < -75 {
                 
@@ -285,7 +314,7 @@ class RadarViewController: UIViewController {
         }
         
         setupGestures()
-        setupTransforms()
+        //setupTransforms()
     }
     
     //adding the pan gesture to the next card in the array
@@ -311,6 +340,7 @@ class RadarViewController: UIViewController {
     }
     
     //laying out the rest of the card list once the top card has been moved off the screen
+    //This gives the cards layout showing the corners of the upcoming ones. Purely cosmetic
     func setupTransforms() {
         for (i, card) in cards.enumerated() {
             if i == 0 { continue; }
@@ -329,63 +359,17 @@ class RadarViewController: UIViewController {
             card.transform = transform
         }
     }
-
-    //copying the function from the people around view controller. May update this later once we can get the observation fixed
-    func observeData() {
-     //clear the user data to prevent duplication
+    
+    /*
+     func observeLikedUsers() {
      self.users.removeAll()
-        Api.User.observeUsers { (user) in
-              self.users.append(user)
-        }
-    }
- 
- 
-     func findUsers () {
-         Api.User.observeUsers { (user) in
-             self.users.append(user)
-            self.setupCard(user: user)
-             return
-                print(user.username)
-             }
-        }
-
-}
-
-
-//Getting the info the current location. This is not relevant until we can solve for the observer
-extension RadarViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
-            manager.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        ProgressHUD.showError("\(error.localizedDescription)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
-        manager.delegate = nil
-        let updatedLocation: CLLocation = locations.first!
-        let newCoordinate: CLLocationCoordinate2D = updatedLocation.coordinate
-        // update location
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set("\(newCoordinate.latitude)", forKey: "current_location_latitude")
-        userDefaults.set("\(newCoordinate.longitude)", forKey: "current_location_longitude")
-        userDefaults.synchronize()
-        
-        if let userLat = UserDefaults.standard.value(forKey: "current_location_latitude") as? String, let userLong = UserDefaults.standard.value(forKey: "current_location_longitude") as? String {
-            let location: CLLocation = CLLocation(latitude: CLLocationDegrees(Double(userLat)!), longitude: CLLocationDegrees(Double(userLong)!))
-            //Ref().databaseSpecificUser(uid: Api.User.currentUserId).updateChildValues([LAT: userLat, LONG: userLong])
-            self.geoFire.setLocation(location, forKey: Api.User.currentUserId) { (error) in
-                if error == nil {
-                    // Find Users
-                    self.findUsers()
-                }
-            }
-        }
-        
-        
-    }
+     //returns all users in the "likes" database.
+     Api.User.observeNewLike { (user) in
+     self.users.append(user)
+     //print("liked users: ",user.username)
+     self.likes.append(user.username)
+     print("already liked users:",self.likes)
+     }
+     }
+     */
 }

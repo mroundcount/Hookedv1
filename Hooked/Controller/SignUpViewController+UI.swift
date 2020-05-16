@@ -11,7 +11,7 @@ import ProgressHUD
 import CoreLocation
 
 extension SignUpViewController {
-
+    
     func setUpTitleTextLbl() {
         let title = "Sign Up"
         //copy over from ViewController+UI
@@ -19,7 +19,7 @@ extension SignUpViewController {
         
         titleTextLbl.attributedText = attributedText
     }
-
+    
     func setUpAvatar() {
         //making the UIImage circular note: height and width is 80
         avatar.layer.cornerRadius = 40
@@ -99,7 +99,7 @@ extension SignUpViewController {
     }
     
     func setUpSignInBtn() {
-    // We're going to apply the key value UI attributed string to a UI button
+        // We're going to apply the key value UI attributed string to a UI button
         let attributedText = NSMutableAttributedString(string: "Already have an account? ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor(white: 0, alpha: 0.65)])
         
         let attributedSubText = NSMutableAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor.black])
@@ -128,63 +128,23 @@ extension SignUpViewController {
             ProgressHUD.showError(ERROR_EMPTY_PASSWORD)
             return
         }
-    }
-    
-    //Configuring the user's current location
-    func configureLocationManager() {
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.distanceFilter = kCLDistanceFilterNone
-        manager.pausesLocationUpdatesAutomatically = true
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            manager.startUpdatingHeading()
-        }
+        //missing image... all or nothing we should add an alert here if taking it out.
     }
     
     func signUp(onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         
         ProgressHUD.show("Loading...")
         //passing all of the paramters into the user API. Assign all text fields to the appropriate parameters.
+        //this is where I might remove image: self.image,
         Api.User.signUp(withUsername: self.usernameTxt.text!, email: self.emailTxt.text!, password: self.passwordTxt.text!, image: self.image, onSuccess: {
-            //dismiss the loading alert onece it is complete
             ProgressHUD.dismiss()
             onSuccess()
         }) { (errorMessage) in
             onError(errorMessage)
+            
         }
     }
 }
-
-
-//Delegate methods to handle location updates
-extension SignUpViewController: CLLocationManagerDelegate {
-    //checking to make sure we have the proper authorization status (see plist)
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == .authorizedAlways) || (status == .authorizedWhenInUse) {
-            manager.startUpdatingLocation()
-        }
-    }
-    //error messaging for current location
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        ProgressHUD.showError("\(error.localizedDescription)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //creating an array of CL location array
-        let updatedLocation: CLLocation = locations.first!
-        let newCoordinate: CLLocationCoordinate2D = updatedLocation.coordinate
-        print(newCoordinate.latitude)
-        print(newCoordinate.longitude)
-        
-        // update location and save it.
-        let userDefaults: UserDefaults = UserDefaults.standard
-        userDefaults.set("\(newCoordinate.latitude)", forKey: "current_location_latitude")
-        userDefaults.set("\(newCoordinate.longitude)", forKey: "current_location_longitude")
-        userDefaults.synchronize()
-    }
-}
-
 
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //updating the avatar any time a user picks up an image.
@@ -203,5 +163,4 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
         }
         picker.dismiss(animated: true, completion: nil)
     }
-        
 }
