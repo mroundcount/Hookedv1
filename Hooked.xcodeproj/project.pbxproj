@@ -39,6 +39,9 @@
 		BF9C63AD242DAE9000DA740D /* UserAroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */; };
 		BFE9C374246B9ED1005686BC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */; };
 		BFE9C376246E202D005686BC /* AudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C375246E202D005686BC /* AudioTableViewCell.swift */; };
+		BFE9C381246FB0C6005686BC /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE9C380246FB0A9005686BC /* LNPopupController.framework */; };
+		BFE9C382246FB0C6005686BC /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFE9C380246FB0A9005686BC /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BFE9C38F246FC791005686BC /* DemoMusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */; };
 		BFEA9653245BCDEE00A43DDD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA9652245BCDED00A43DDD /* ChatViewController.swift */; };
 		BFEA9655245BCEB200A43DDD /* ChatViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */; };
 		BFEA9657245BCEFA00A43DDD /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA9656245BCEFA00A43DDD /* MessageTableViewCell.swift */; };
@@ -52,6 +55,30 @@
 		BFF97E6E243447A90077DC77 /* NewMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF97E6D243447A80077DC77 /* NewMatchTableViewController.swift */; };
 		E1B2A8A9939DB96154C388A5 /* Pods_Hooked.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27574B2968A9AEE7192E861D /* Pods_Hooked.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFE9C37F246FB0A9005686BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39DB52E51B5823330061C589;
+			remoteInfo = LNPopupController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BFE9C383246FB0C6005686BC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BFE9C382246FB0C6005686BC /* LNPopupController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		27574B2968A9AEE7192E861D /* Pods_Hooked.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hooked.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +118,8 @@
 		BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAroundCollectionViewCell.swift; sourceTree = "<group>"; };
 		BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BFE9C375246E202D005686BC /* AudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableViewCell.swift; sourceTree = "<group>"; };
+		BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNPopupController.xcodeproj; path = "../LNPopupController-master/LNPopupController/LNPopupController.xcodeproj"; sourceTree = "<group>"; };
+		BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMusicPlayerController.swift; sourceTree = "<group>"; };
 		BFEA9652245BCDED00A43DDD /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+Extension.swift"; sourceTree = "<group>"; };
 		BFEA9656245BCEFA00A43DDD /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
@@ -110,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B2A8A9939DB96154C388A5 /* Pods_Hooked.framework in Frameworks */,
+				BFE9C381246FB0C6005686BC /* LNPopupController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +157,7 @@
 		BF9C6363240A160100DA740D = {
 			isa = PBXGroup;
 			children = (
+				BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */,
 				BF9C636E240A160100DA740D /* Hooked */,
 				BF9C636D240A160100DA740D /* Products */,
 				DDE3FC04C314C6E6311349FC /* Pods */,
@@ -164,6 +195,7 @@
 		BFDE1372243AB1A8001456FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */,
 				BFEA9652245BCDED00A43DDD /* ChatViewController.swift */,
 				BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */,
 				BFEA9656245BCEFA00A43DDD /* MessageTableViewCell.swift */,
@@ -217,6 +249,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		BFE9C37C246FB0A7005686BC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFE9C380246FB0A9005686BC /* LNPopupController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DDE3FC04C314C6E6311349FC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +278,7 @@
 				BF9C6369240A160100DA740D /* Frameworks */,
 				BF9C636A240A160100DA740D /* Resources */,
 				398D5C33C15F2CFD8EE54011 /* [CP] Embed Pods Frameworks */,
+				BFE9C383246FB0C6005686BC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,6 +301,7 @@
 				TargetAttributes = {
 					BF9C636B240A160100DA740D = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -274,12 +316,28 @@
 			mainGroup = BF9C6363240A160100DA740D;
 			productRefGroup = BF9C636D240A160100DA740D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BFE9C37C246FB0A7005686BC /* Products */;
+					ProjectRef = BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BF9C636B240A160100DA740D /* Hooked */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BFE9C380246FB0A9005686BC /* LNPopupController.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LNPopupController.framework;
+			remoteRef = BFE9C37F246FB0A9005686BC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BF9C636A240A160100DA740D /* Resources */ = {
@@ -375,6 +433,7 @@
 				BF9C63992413522D00DA740D /* UserApi.swift in Sources */,
 				BF9C63A72414A09A00DA740D /* Extension.swift in Sources */,
 				BF9C6372240A160100DA740D /* SceneDelegate.swift in Sources */,
+				BFE9C38F246FC791005686BC /* DemoMusicPlayerController.swift in Sources */,
 				BF9C639B241361AE00DA740D /* StorageService.swift in Sources */,
 				BF9C639D2413674300DA740D /* Ref.swift in Sources */,
 				BF9C63A5241493D900DA740D /* User.swift in Sources */,
@@ -525,6 +584,7 @@
 			baseConfigurationReference = 71132829B377272498B02126 /* Pods-Hooked.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2384X3M7MT;
 				INFOPLIST_FILE = Hooked/Info.plist;
@@ -534,6 +594,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Something.Hooked;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hooked/Controller/Demo Testing/Hooked-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -544,6 +606,7 @@
 			baseConfigurationReference = 987465630227D54604454D34 /* Pods-Hooked.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2384X3M7MT;
 				INFOPLIST_FILE = Hooked/Info.plist;
@@ -553,6 +616,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Something.Hooked;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hooked/Controller/Demo Testing/Hooked-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

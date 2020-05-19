@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import LNPopupController
+import AVFoundation
 
 class UserProfileViewController: UIViewController {
     
@@ -20,6 +22,8 @@ class UserProfileViewController: UIViewController {
     var user: User!
     var users: [User] = []
     var audio = [Audio]()
+    var player: AVPlayer!
+    var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +118,47 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 85
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! AudioTableViewCell
+        print(cell.audio.title)
+        /*
+        if player != nil {
+            if audioPlayer.isPlaying {
+                audioPlayer.stop()
+            }
+        }
+        */
+        
+        let popupContentController = storyboard?.instantiateViewController(withIdentifier: "DemoMusicPlayerController") as! DemoMusicPlayerController
+        
+        popupContentController.songTitle = cell.audio.title
+        popupContentController.artistName = cell.audio.artist
+        
+        //Roundcount Added
+        //popupContentController.handlePlay(audio: audio[indexPath.row])
+        popupContentController.play(audio: audio[indexPath.row])
+        //End
+        
+        popupContentController.popupItem.accessibilityHint = NSLocalizedString("Double Tap to Expand the Mini Player", comment: "")
+        tabBarController?.popupContentView.popupCloseButton.accessibilityLabel = NSLocalizedString("Dismiss Now Playing Screen", comment: "")
+        
+        #if targetEnvironment(macCatalyst)
+        tabBarController?.popupBar.inheritsVisualStyleFromDockingView = true
+        #endif
+        
+        tabBarController?.presentPopupBar(withContentViewController: popupContentController, animated: true, completion: nil)
+        
+        if #available(iOS 13.0, *) {
+            tabBarController?.popupBar.tintColor = UIColor.label
+        } else {
+            //tabBarController?.popupBar.tintColor = UIColor(white: 38.0 / 255.0, alpha: 1.0)
+            tabBarController?.popupBar.tintColor = UIColor(red: 160, green: 160, blue: 160, alpha: 1)
+        }
+                
+        tableView.deselectRow(at: indexPath, animated: true)
+
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {

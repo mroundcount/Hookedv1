@@ -15,6 +15,10 @@ class UploadTableViewController: UITableViewController {
     
     var audioUrl: URL?
     var audioName: String?
+    var username: String?
+    
+    var users: [User] = []
+    
     let genre = ["Rock", "Rap", "Classical"]
     
     @IBOutlet weak var titleTextField: UITextField!
@@ -40,6 +44,7 @@ class UploadTableViewController: UITableViewController {
     
     func observeData() {
         Api.User.getUserInforSingleEvent(uid: Api.User.currentUserId) { (user) in
+            let username = user.username
         }
     }
     
@@ -142,6 +147,7 @@ extension UploadTableViewController: UIDocumentPickerDelegate {
         let date: Double = Date().timeIntervalSince1970
         var value = dict
         value["artist"] = Api.User.currentUserId
+        value["artistName"] = username
         value["date"] = date
         value["read"] = true
         value["title"] = titleTextField.text
