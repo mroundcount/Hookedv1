@@ -18,6 +18,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var uploadBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    var popupContentController: DemoMusicPlayerController!
     
     var user: User!
     var users: [User] = []
@@ -40,6 +41,8 @@ class UserProfileViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.dataSource = self
         tableView.delegate = self
+        
+        popupContentController = storyboard?.instantiateViewController(withIdentifier: "DemoMusicPlayerController") as! DemoMusicPlayerController
 
     }
     
@@ -121,23 +124,23 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! AudioTableViewCell
         print(cell.audio.title)
-                
-
-        if audioPlayer?.isPlaying == false{
-            print("caught ya 2")
-            //audioPlayer.stop()
+        
+        if audioPlayer != nil {
+            if audioPlayer.isPlaying {
+                print("caught ya 2")
+                //audioPlayer.stop()
+            } else {
+                print("OOOOOOOOOOOPPPPPS")
+            }
         }
         
-        let popupContentController = storyboard?.instantiateViewController(withIdentifier: "DemoMusicPlayerController") as! DemoMusicPlayerController
         
         popupContentController.songTitle = cell.audio.title
         popupContentController.artistName = cell.audio.artist
         
-        
-        
         //Roundcount Added
-        popupContentController.stopAudio()
-        popupContentController.dismissPopup()
+//        popupContentController.stopAudio()
+//        popupContentController.dismissPopup()
         popupContentController.downloadFile(audio: audio[indexPath.row])
         //End
         

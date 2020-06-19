@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AB7D50E249D608C0098D7F0 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */; };
+		5AB7D50F249D608C0098D7F0 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF68912C246665DA00690BDF /* UploadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912B246665DA00690BDF /* UploadTableViewController.swift */; };
 		BF68912E246668E600690BDF /* AudioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912D246668E600690BDF /* AudioAPI.swift */; };
 		BF68913024666A0B00690BDF /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912F24666A0B00690BDF /* Audio.swift */; };
@@ -40,8 +42,6 @@
 		BF9C63AD242DAE9000DA740D /* UserAroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */; };
 		BFE9C374246B9ED1005686BC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */; };
 		BFE9C376246E202D005686BC /* AudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C375246E202D005686BC /* AudioTableViewCell.swift */; };
-		BFE9C381246FB0C6005686BC /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE9C380246FB0A9005686BC /* LNPopupController.framework */; };
-		BFE9C382246FB0C6005686BC /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BFE9C380246FB0A9005686BC /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BFE9C38F246FC791005686BC /* DemoMusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */; };
 		BFEA9653245BCDEE00A43DDD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA9652245BCDED00A43DDD /* ChatViewController.swift */; };
 		BFEA9655245BCEB200A43DDD /* ChatViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */; };
@@ -58,9 +58,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BFE9C37F246FB0A9005686BC /* PBXContainerItemProxy */ = {
+		5AB7D50C249D5D7C0098D7F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */;
+			containerPortal = 5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 39DB52E51B5823330061C589;
 			remoteInfo = LNPopupController;
@@ -74,7 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BFE9C382246FB0C6005686BC /* LNPopupController.framework in Embed Frameworks */,
+				5AB7D50F249D608C0098D7F0 /* LNPopupController.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		27574B2968A9AEE7192E861D /* Pods_Hooked.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hooked.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNPopupController.xcodeproj; path = "../../../Downloads/LNPopupController-master/LNPopupController/LNPopupController.xcodeproj"; sourceTree = "<group>"; };
 		71132829B377272498B02126 /* Pods-Hooked.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.debug.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.debug.xcconfig"; sourceTree = "<group>"; };
 		987465630227D54604454D34 /* Pods-Hooked.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.release.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.release.xcconfig"; sourceTree = "<group>"; };
 		BF68912B246665DA00690BDF /* UploadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTableViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAroundCollectionViewCell.swift; sourceTree = "<group>"; };
 		BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BFE9C375246E202D005686BC /* AudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableViewCell.swift; sourceTree = "<group>"; };
-		BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNPopupController.xcodeproj; path = "../LNPopupController-master/LNPopupController/LNPopupController.xcodeproj"; sourceTree = "<group>"; };
 		BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMusicPlayerController.swift; sourceTree = "<group>"; };
 		BFEA9652245BCDED00A43DDD /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -141,13 +141,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B2A8A9939DB96154C388A5 /* Pods_Hooked.framework in Frameworks */,
-				BFE9C381246FB0C6005686BC /* LNPopupController.framework in Frameworks */,
+				5AB7D50E249D608C0098D7F0 /* LNPopupController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5AB7D509249D5D7C0098D7F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		893FBDEAFB97340EB28C8EC4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,7 +197,7 @@
 		BF9C6363240A160100DA740D = {
 			isa = PBXGroup;
 			children = (
-				BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */,
+				5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */,
 				BF9C636E240A160100DA740D /* Hooked */,
 				BF9C636D240A160100DA740D /* Products */,
 				DDE3FC04C314C6E6311349FC /* Pods */,
@@ -276,14 +284,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		BFE9C37C246FB0A7005686BC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BFE9C380246FB0A9005686BC /* LNPopupController.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		DDE3FC04C314C6E6311349FC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,8 +345,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = BFE9C37C246FB0A7005686BC /* Products */;
-					ProjectRef = BFE9C37B246FB0A7005686BC /* LNPopupController.xcodeproj */;
+					ProductGroup = 5AB7D509249D5D7C0098D7F0 /* Products */;
+					ProjectRef = 5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -357,11 +357,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		BFE9C380246FB0A9005686BC /* LNPopupController.framework */ = {
+		5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = LNPopupController.framework;
-			remoteRef = BFE9C37F246FB0A9005686BC /* PBXContainerItemProxy */;
+			remoteRef = 5AB7D50C249D5D7C0098D7F0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -616,6 +616,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2384X3M7MT;
 				INFOPLIST_FILE = Hooked/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,6 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2384X3M7MT;
 				INFOPLIST_FILE = Hooked/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

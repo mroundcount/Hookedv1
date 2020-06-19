@@ -22,12 +22,7 @@ extension DemoMusicPlayerController {
     //https://mobikul.com/play-audio-file-save-document-directory-ios-swift/
     func downloadFile(audio: Audio) {
         
-        if audioPlayer?.play() ?? false {
-            print("playing")
-        } else {
-            print("not playing")
-        }
-                        
+        
         let audioUrl = audio.audioUrl
         if audioUrl.isEmpty {
             return
@@ -49,7 +44,9 @@ extension DemoMusicPlayerController {
                 do {
                     audioPlayer = try AVAudioPlayer(contentsOf: destinationUrl)
                     //guard let player = self.audioPlayer else { return }
+                    
                     audioPlayer.prepareToPlay()
+                    
                     audioPlayer.play()
                     audioPlayer.delegate = self
                     print("playing \(audio.title)")
@@ -83,10 +80,10 @@ extension DemoMusicPlayerController {
     }
  
     func play() {
-        if  audioPlayer.isPlaying == true {
+        if  audioPlayer.isPlaying {
             print("from play audio is playing")
             audioPlayer.play()
-        }else{
+        } else{
             //audioPlayer?.play()
             print("from play audio is not playing")
             audioPlayer.stop()
