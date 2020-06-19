@@ -10,6 +10,7 @@
 		BF68912C246665DA00690BDF /* UploadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912B246665DA00690BDF /* UploadTableViewController.swift */; };
 		BF68912E246668E600690BDF /* AudioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912D246668E600690BDF /* AudioAPI.swift */; };
 		BF68913024666A0B00690BDF /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912F24666A0B00690BDF /* Audio.swift */; };
+		BF6B25DF2478C6690076B069 /* DemoMusicPlayerController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */; };
 		BF82D24E242FF4ED00C90CDA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */; };
 		BF9C6370240A160100DA740D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C636F240A160100DA740D /* AppDelegate.swift */; };
 		BF9C6372240A160100DA740D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C6371240A160100DA740D /* SceneDelegate.swift */; };
@@ -87,6 +88,7 @@
 		BF68912B246665DA00690BDF /* UploadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTableViewController.swift; sourceTree = "<group>"; };
 		BF68912D246668E600690BDF /* AudioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAPI.swift; sourceTree = "<group>"; };
 		BF68912F24666A0B00690BDF /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DemoMusicPlayerController+Extension.swift"; sourceTree = "<group>"; };
 		BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BF9C636C240A160100DA740D /* Hooked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hooked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9C636F240A160100DA740D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BF6B25E12496AB190076B069 /* References */ = {
+			isa = PBXGroup;
+			children = (
+				BF6B25E32496B0AB0076B069 /* API */,
+				BF6B25E22496B0840076B069 /* Controller */,
+			);
+			path = References;
+			sourceTree = "<group>";
+		};
+		BF6B25E22496B0840076B069 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BFEA9652245BCDED00A43DDD /* ChatViewController.swift */,
+				BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */,
+				BFEA9656245BCEFA00A43DDD /* MessageTableViewCell.swift */,
+				BF9C63A024143FB800DA740D /* PeopleTableViewController.swift */,
+				BF9C63AA242C5B8A00DA740D /* UsersAroundViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BF6B25E32496B0AB0076B069 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BFEA9658245BD02D00A43DDD /* MessageAPI.swift */,
+				BFEA965A245BD06800A43DDD /* Message.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		BF9C6363240A160100DA740D = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +211,7 @@
 				BF9C636F240A160100DA740D /* AppDelegate.swift */,
 				BF9C6371240A160100DA740D /* SceneDelegate.swift */,
 				BF9C6375240A160100DA740D /* Main.storyboard */,
+				BF6B25E12496AB190076B069 /* References */,
 				BFDE1373243AB288001456FD /* API */,
 				BFDE1374243AB2BD001456FD /* Cells */,
 				BFDE1372243AB1A8001456FD /* Controller */,
@@ -196,25 +229,20 @@
 			isa = PBXGroup;
 			children = (
 				BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */,
-				BFEA9652245BCDED00A43DDD /* ChatViewController.swift */,
-				BFEA9654245BCEB200A43DDD /* ChatViewController+Extension.swift */,
-				BFEA9656245BCEFA00A43DDD /* MessageTableViewCell.swift */,
+				BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */,
 				BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */,
 				BF9C6390240AFA9600DA740D /* ForgotPasswordViewController.swift */,
 				BF9C6392240AFAAE00DA740D /* ForgotPasswordViewController+UI.swift */,
 				BFF97E6D243447A80077DC77 /* NewMatchTableViewController.swift */,
-				BF9C63A024143FB800DA740D /* PeopleTableViewController.swift */,
 				BFF1C3C92449546800E99A46 /* PreferenceTableViewController.swift */,
 				BF9C63A82426A7C200DA740D /* ProfileTableViewController.swift */,
 				BF68912B246665DA00690BDF /* UploadTableViewController.swift */,
 				BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */,
-				BFE9C375246E202D005686BC /* AudioTableViewCell.swift */,
 				BFF276AC2432F32C00E66930 /* RadarViewController.swift */,
 				BF9C638C240AF57F00DA740D /* SignInViewController.swift */,
 				BF9C638E240AF59200DA740D /* SignInViewController+UI.swift */,
 				BF9C6388240AE08300DA740D /* SignUpViewController.swift */,
 				BF9C638A240AE9C000DA740D /* SignUpViewController+UI.swift */,
-				BF9C63AA242C5B8A00DA740D /* UsersAroundViewController.swift */,
 				BF9C6373240A160100DA740D /* ViewController.swift */,
 				BF9C6386240AD8C300DA740D /* ViewController+UI.swift */,
 			);
@@ -230,8 +258,6 @@
 				BF9C639A241361AE00DA740D /* StorageService.swift */,
 				BF9C63A4241493D900DA740D /* User.swift */,
 				BF9C63982413522D00DA740D /* UserApi.swift */,
-				BFEA9658245BD02D00A43DDD /* MessageAPI.swift */,
-				BFEA965A245BD06800A43DDD /* Message.swift */,
 				BF68912D246668E600690BDF /* AudioAPI.swift */,
 				BF68912F24666A0B00690BDF /* Audio.swift */,
 				BF9C639C2413674300DA740D /* Ref.swift */,
@@ -242,6 +268,7 @@
 		BFDE1374243AB2BD001456FD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BFE9C375246E202D005686BC /* AudioTableViewCell.swift */,
 				BFF276B02432FCC000E66930 /* Card.swift */,
 				BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */,
 				BF9C63A2241441E700DA740D /* UserTableViewCell.swift */,
@@ -428,6 +455,7 @@
 				BFF97E6E243447A90077DC77 /* NewMatchTableViewController.swift in Sources */,
 				BF9C6393240AFAAE00DA740D /* ForgotPasswordViewController+UI.swift in Sources */,
 				BFF276B12432FCC000E66930 /* Card.swift in Sources */,
+				BF6B25DF2478C6690076B069 /* DemoMusicPlayerController+Extension.swift in Sources */,
 				BF9C6387240AD8C300DA740D /* ViewController+UI.swift in Sources */,
 				BFF276AD2432F32C00E66930 /* RadarViewController.swift in Sources */,
 				BF9C63992413522D00DA740D /* UserApi.swift in Sources */,

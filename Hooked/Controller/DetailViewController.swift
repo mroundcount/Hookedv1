@@ -38,13 +38,7 @@ class DetailViewController: UIViewController {
         backBtn.clipsToBounds = true
         
         avatar.loadImage(user.profileImageUrl)
-        /*
-         if isMatch {
-         avatar.loadImage(user.profileImageUrl)
-         } else {
-         avatar.image = user.profileImage
-         }
-         */
+   
         avatar.clipsToBounds = true
         //avatar.image = user.profileImag
         let frameGradient = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 350)
@@ -70,6 +64,8 @@ class DetailViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.dataSource = self
         tableView.delegate = self
+        
+        
         
     }
     //Hide the navigation bar

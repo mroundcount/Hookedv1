@@ -19,17 +19,20 @@ class StorageService {
     static func saveAudioFile(url: URL, id: String, onSuccess: @escaping(_ value: Any) -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         let ref = Ref().storageSpecificAudio(id: id)
         
+        let metadata = StorageMetadata()
+        metadata.contentType = "audio/mp3"
+        
         ref.putFile(from: url, metadata: nil) { (metadata, error) in
             if error != nil {
                 onError(error!.localizedDescription)
             }
             ref.downloadURL(completion: { (audioUrl, error) in
+                print("from step 3 \(url)")
                 if let metaAudioUrl = audioUrl?.absoluteString {
                     let dict: Dictionary<String, Any> = [
                         "audioUrl": metaAudioUrl as Any,
                         "height": 720,
-                        "width": 1280,
-                        "text": "from audio file"
+                        "width": 1280
                     ]
                     onSuccess(dict)
                 }

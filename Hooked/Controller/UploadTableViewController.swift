@@ -59,9 +59,10 @@ class UploadTableViewController: UITableViewController {
     }
     
     @IBAction func saveBtnDidTap(_ sender: Any) {
-        print("Saving")
+        print("Uploading")
         //ProgressHUD.show("Saving...")
         uploadDocument()
+        
     }
     
     func setUpEmailTxt() {
@@ -130,6 +131,8 @@ extension UploadTableViewController: UIDocumentPickerDelegate {
         }) {
             (errorMessage) in
         }
+        //Dismiss view controller here.
+        navigationController?.popViewController(animated: true)
     }
     
     
@@ -144,8 +147,10 @@ extension UploadTableViewController: UIDocumentPickerDelegate {
     }
     
     func sendToFirebase(dict: Dictionary<String, Any>) {
+        
         let date: Double = Date().timeIntervalSince1970
         var value = dict
+                
         value["artist"] = Api.User.currentUserId
         value["artistName"] = username
         value["date"] = date

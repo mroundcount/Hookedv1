@@ -114,6 +114,7 @@ class MessageTableViewCell: UITableViewCell {
         
     }
 
+    
     @IBAction func playBtnDidTapped(_ sender: Any) {
         handlePlay()
     }
@@ -161,6 +162,7 @@ class MessageTableViewCell: UITableViewCell {
             player?.play()
             playButton.isHidden = true
         }
+
  
     }
     

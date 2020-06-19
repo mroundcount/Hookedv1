@@ -36,7 +36,7 @@ class Audio {
         let title = (dict["title"] as? String) == nil ? "" : (dict["title"]! as! String)
         let genre = (dict["genre"] as? String) == nil ? "" : (dict["genre"]! as! String)
         let audioUrl = (dict["audioUrl"] as? String) == nil ? "" : (dict["audioUrl"]! as! String)
-        
+                
         let audio = Audio(id: keyId, artist: artist, artistName: artistName, date: date, title: title, genre: genre, audioUrl: audioUrl)
 
         return audio

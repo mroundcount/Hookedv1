@@ -22,7 +22,6 @@ class UserProfileViewController: UIViewController {
     var user: User!
     var users: [User] = []
     var audio = [Audio]()
-    var player: AVPlayer!
     var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
@@ -41,7 +40,7 @@ class UserProfileViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.dataSource = self
         tableView.delegate = self
-        
+
     }
     
     @IBAction func uploadBtnDidPress(_ sender: UIButton) {
@@ -78,7 +77,7 @@ class UserProfileViewController: UIViewController {
             print(audio.genre)
             print(audio.date)
             print(audio.audioUrl)
-            print("done")
+            print("Observation complete")
         }
     }
     
@@ -103,15 +102,14 @@ class UserProfileViewController: UIViewController {
 
 
 extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(audio.count)
         return audio.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell") as! AudioTableViewCell
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell", for: indexPath) as! AudioTableViewCell
-        cell.playButton.isHidden = audio[indexPath.row].audioUrl == ""
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell") as! AudioTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AudioTableViewCell", for: indexPath) as! AudioTableViewCell
         cell.configureCell(uid: Api.User.currentUserId, audio: audio[indexPath.row])
         return cell
     }
@@ -123,22 +121,24 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! AudioTableViewCell
         print(cell.audio.title)
-        /*
-        if player != nil {
-            if audioPlayer.isPlaying {
-                audioPlayer.stop()
-            }
+                
+
+        if audioPlayer?.isPlaying == false{
+            print("caught ya 2")
+            //audioPlayer.stop()
         }
-        */
         
         let popupContentController = storyboard?.instantiateViewController(withIdentifier: "DemoMusicPlayerController") as! DemoMusicPlayerController
         
         popupContentController.songTitle = cell.audio.title
         popupContentController.artistName = cell.audio.artist
         
+        
+        
         //Roundcount Added
-        //popupContentController.handlePlay(audio: audio[indexPath.row])
-        popupContentController.play(audio: audio[indexPath.row])
+        popupContentController.stopAudio()
+        popupContentController.dismissPopup()
+        popupContentController.downloadFile(audio: audio[indexPath.row])
         //End
         
         popupContentController.popupItem.accessibilityHint = NSLocalizedString("Double Tap to Expand the Mini Player", comment: "")

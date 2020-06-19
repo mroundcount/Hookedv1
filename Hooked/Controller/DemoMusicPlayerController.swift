@@ -10,15 +10,22 @@ import Foundation
 import UIKit
 import LNPopupController
 import AVFoundation
+import AVKit
+
+import Firebase
 
 class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
     
     //Roundcount Added
-    var playerLayer: AVPlayerLayer?
-    var player: AVPlayer?
+    //var playerLayer: AVPlayerLayer?
+    //var player: AVPlayer?
     var audio: Audio!
-    var audioPlayer: AVAudioPlayer?
+    var audioPlayer: AVAudioPlayer!
+    var audioPath: URL!
+    
     var presented = false
+    var length : Float?
+        
     //End
     
     @IBOutlet weak var songNameLabel: UILabel!
@@ -26,42 +33,16 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     
+    @IBOutlet weak var slider: UISlider!
+    
     @IBOutlet weak var albumArtImageView: UIImageView!
     
     let accessibilityDateComponentsFormatter = DateComponentsFormatter()
     
     var timer : Timer?
-    
     var pauseBtn : UIBarButtonItem!
     var playBtn : UIBarButtonItem!
     var closeBtn : UIBarButtonItem!
-    
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        let pauseBtn = UIBarButtonItem(image: UIImage(named: "pause"), style: .plain, target: self, action: #selector(pauseAction))
-        //pauseBtn.accessibilityLabel = NSLocalizedString("Pause", comment: "")
-        
-        let playBtn = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(playAction))
-        //playBtn.accessibilityLabel = NSLocalizedString("Play", comment: "")
-        
-        let closeBtn = UIBarButtonItem(image: UIImage(named: "close-1"), style: .plain, target: self, action: #selector(closeAction))
-        //closeBtn.accessibilityLabel = NSLocalizedString("Closing", comment: "")
-        
-        let oldOS : Bool
-        #if !targetEnvironment(macCatalyst)
-        oldOS = ProcessInfo.processInfo.operatingSystemVersion.majorVersion < 10
-        #else
-        oldOS = false
-        #endif
-        
-        popupItem.rightBarButtonItems = [ pauseBtn, closeBtn ]
-        
-        accessibilityDateComponentsFormatter.unitsStyle = .spellOut
-        
-    }
     
     var songTitle: String = "" {
         didSet {
@@ -122,17 +103,41 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
         
         timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(DemoMusicPlayerController._timerTicked(_:)), userInfo: nil, repeats: true)
         
-        
-        //Roundcount Added
-        if observation != nil {
-            stopObservers()
-        }
-        
-        let pauseBtn = UIBarButtonItem(image: UIImage(named: "pause"), style: .plain, target: self, action: #selector(pauseAction))
-        let playBtn = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(playAction))
-        let closeBtn = UIBarButtonItem(image: UIImage(named: "close-1"), style: .plain, target: self, action: #selector(closeAction))
+        pauseBtn = UIBarButtonItem(image: UIImage(named: "pause"), style: .plain, target: self, action: #selector(pauseAction))
+        playBtn = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(playAction))
+        closeBtn = UIBarButtonItem(image: UIImage(named: "close-1"), style: .plain, target: self, action: #selector(closeAction))
         //End
+        popupItem.rightBarButtonItems = [ pauseBtn, closeBtn ]
+        
     }
+    
+    @objc func pauseAction() {
+        print("pause action")
+        audioPlayer!.pause()
+        popupItem.rightBarButtonItems = [ playBtn , closeBtn ] as? [UIBarButtonItem]
+        //popupContentController.stopTimer()
+    }
+    
+    @objc func playAction() {
+        print("play action")
+        audioPlayer!.play()
+        popupItem.rightBarButtonItems = [ pauseBtn , closeBtn ] as? [UIBarButtonItem]
+        //popupContentController.startTimer()
+    }
+    
+    @objc func closeAction() {
+        print("close action")
+        audioPlayer!.stop()
+        self.dismissPopup()
+    }
+    
+    func dismissPopup() {
+        presented = false
+        popupPresentationContainer?.dismissPopupBar(animated: true, completion: nil)
+    }
+    
+    
+    
     
     @objc func _timerTicked(_ timer: Timer) {
         popupItem.progress += 0.0002;
@@ -149,87 +154,17 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    @objc func pauseAction() {
-        print("pause action")
-        player!.pause()
-        popupItem.rightBarButtonItems = [ playBtn , closeBtn ] as? [UIBarButtonItem]
-        //popupContentController.s3Transfer.pauseAudio()
-        //popupContentController.stopTimer()
-    }
-    @objc func playAction() {
-        print("play action")
-        player!.play()
-        popupItem.rightBarButtonItems = [ pauseBtn , closeBtn ] as? [UIBarButtonItem]
-        //popupContentController.s3Transfer.resumeAudio()
-        //popupContentController.startTimer()
-    }
     
-    @objc func closeAction() {
-        print("close action")
-        player!.pause()
-        //self.pauseAction()
-        self.dismissPopup()
-    }
-    func dismissPopup() {
-        presented = false
-        dismissPopupBar(animated: true, completion: nil)
-    }
     
+    
+    
+    
+    //Known methof of working using AVPlayer
     /*
-     func updateProgress(progress: Float) {
-     popupContentController.popupItem.progress = progress
-     }
-     */
-    //Roundcount Added
-    
-    
-    
-    func play(audio: Audio) {
-        
-        let audioUrl = audio.audioUrl
-        if audioUrl.isEmpty {
-            return
-        }
-        print("playing \(audioUrl)")
-        
-        //let url: URL = audioUrl.absoluteURL!
-        
-        //let url = URL(string: audioUrl)
-        //let url = NSURL(string: audioUrl)
-        //let url = URL(fileURLWithPath: audioUrl)
-        
-        //let path = Bundle.main.path(forResource: audioUrl, ofType: "MP3")!
-        //let url = URL(fileURLWithPath: path)
-        
-        //let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: audioUrl, ofType: "mp3")!)
-        //let url = URL.init(string: audioUrl)
-        
-        //let fileURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("\(audioUrl).mp3")
-        
-        do {
-            print("made it to play")
-            print("this is the URL being generated \(audioUrl)")
-            //print("this is the URL being generated \(url)")
-            self.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioUrl))
-            print("made it past the tricky part")
-            audioPlayer?.delegate = self
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch let error as NSError {
-            //self.player = nil
-            print(error.localizedDescription)
-        } catch {
-            print("AVAudioPlayer init failed")
-        }
-        
-    }
-
-    
-    
-    //Known methof od working using AVPlayer
     var observation: Any? = nil
     
     func handlePlay(audio: Audio) {
+        
         let audioUrl = audio.audioUrl
         if audioUrl.isEmpty {
             return
@@ -238,19 +173,27 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
         
         if let url = URL(string: audioUrl) {
             print("made it to the function: \(audioUrl)")
+            //activityIndicatorView.isHidden = false
+            //activityIndicatorView.startAnimating()
+            stopObservers()
             player = AVPlayer(url: url)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
             observation = player?.addObserver(self, forKeyPath: "status", options: NSKeyValueObservingOptions.new, context: nil)
             player?.play()
+            //playButton.isHidden = true
         }
-        print("finished handlePlay function")
+        
     }
     
     func stopObservers() {
+        print("sup Drew function called")
         player?.removeObserver(self, forKeyPath: "status")
         observation = nil
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print("observeValue called")
         if keyPath == "status" {
             let status: AVPlayer.Status = player!.status
             switch (status) {
@@ -263,4 +206,5 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
             }
         }
     }
+ */
 }
