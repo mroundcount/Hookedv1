@@ -137,12 +137,9 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
         
         popupContentController.songTitle = cell.audio.title
         popupContentController.artistName = cell.audio.artist
-        
-        //Roundcount Added
-//        popupContentController.stopAudio()
-//        popupContentController.dismissPopup()
+
         popupContentController.downloadFile(audio: audio[indexPath.row])
-        //End
+
         
         popupContentController.popupItem.accessibilityHint = NSLocalizedString("Double Tap to Expand the Mini Player", comment: "")
         tabBarController?.popupContentView.popupCloseButton.accessibilityLabel = NSLocalizedString("Dismiss Now Playing Screen", comment: "")

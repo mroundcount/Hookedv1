@@ -17,11 +17,9 @@ import FirebaseDatabase
 
 extension DemoMusicPlayerController {
 
-    
     //This is the one we'll be using
     //https://mobikul.com/play-audio-file-save-document-directory-ios-swift/
     func downloadFile(audio: Audio) {
-        
         
         let audioUrl = audio.audioUrl
         if audioUrl.isEmpty {
@@ -44,10 +42,10 @@ extension DemoMusicPlayerController {
                 do {
                     audioPlayer = try AVAudioPlayer(contentsOf: destinationUrl)
                     //guard let player = self.audioPlayer else { return }
-                    
                     audioPlayer.prepareToPlay()
-                    
                     audioPlayer.play()
+                    //startTimer()
+                    gotAudioLength()
                     audioPlayer.delegate = self
                     print("playing \(audio.title)")
                     
@@ -70,7 +68,9 @@ extension DemoMusicPlayerController {
                         //guard let player = self.audioPlayer else { return }
                         self.audioPlayer?.prepareToPlay()
                         self.audioPlayer?.play()
-                        
+                        //self.startTimer()
+                        self.gotAudioLength()
+                        self.updateSlider()
                     } catch let error as NSError {
                         print(error.localizedDescription)
                     }
@@ -78,20 +78,7 @@ extension DemoMusicPlayerController {
             }
         }
     }
- 
-    func play() {
-        if  audioPlayer.isPlaying {
-            print("from play audio is playing")
-            audioPlayer.play()
-        } else{
-            //audioPlayer?.play()
-            print("from play audio is not playing")
-            audioPlayer.stop()
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-        }
-    }
-    
+
     func stopAudio() {
         print("stop called")
             audioPlayer?.stop()
@@ -99,48 +86,10 @@ extension DemoMusicPlayerController {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("finished")
+        audioPlayer?.stop()
+        stopTimer()
+        popupItem.rightBarButtonItems = [ playBtn , closeBtn ] as? [UIBarButtonItem]
     }
+
 }
-
-
-
-
-
-/*
- func getLengthOfAudio() -> TimeInterval {
-     if audioPlayer != nil {
-     if audioPlayer.isPlaying {
-     return audioPlayer.duration
- }
- }
- return 0.0
- }
- 
- func gotAudioLength() {
- self.length = Float(getLengthOfAudio())
- slider.maximumValue = length!
- startTimer()
- }
- 
- 
- func getCurrentTime() -> TimeInterval {
- if player != nil {
- if player.isPlaying {
- return player.currentTime
- }
- }
- return 0.0
- }
- 
- @objc func updateSlider() {
- let prog = Float(getCurrentTime()) / self.length!
- self.popupItem.progress = prog
- slider.value = Float(getCurrentTime())
- }
- 
- func updateProgress(progress: Float) {
- popupContentController.popupItem.progress = progress
- }
- 
- */
 

@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Audio dictionary
 class Audio {
     var id: String
     var artist: String
@@ -17,6 +18,7 @@ class Audio {
     var genre: String
     var audioUrl: String
     
+    //initializing the audio variables
     init(id: String, artist: String, artistName: String, date: Double, title: String, genre: String, audioUrl: String) {
         self.id = id
         self.artist = artist
@@ -27,6 +29,7 @@ class Audio {
         self.audioUrl = audioUrl
     }
     
+    //passing in the audio variables to be published
     static func transformAudio(dict: [String: Any], keyId: String) -> Audio? {
         guard let artist = dict["artist"] as? String,
             let date = dict["date"] as? Double else {

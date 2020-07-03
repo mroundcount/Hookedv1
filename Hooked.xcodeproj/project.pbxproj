@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5AB7D50E249D608C0098D7F0 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */; };
-		5AB7D50F249D608C0098D7F0 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF68912C246665DA00690BDF /* UploadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912B246665DA00690BDF /* UploadTableViewController.swift */; };
 		BF68912E246668E600690BDF /* AudioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912D246668E600690BDF /* AudioAPI.swift */; };
 		BF68913024666A0B00690BDF /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912F24666A0B00690BDF /* Audio.swift */; };
 		BF6B25DF2478C6690076B069 /* DemoMusicPlayerController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */; };
+		BF6B25F1249DB04B0076B069 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF6B25F0249DB03F0076B069 /* LNPopupController.framework */; };
+		BF6B25F2249DB04B0076B069 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF6B25F0249DB03F0076B069 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF82D24E242FF4ED00C90CDA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */; };
 		BF9C6370240A160100DA740D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C636F240A160100DA740D /* AppDelegate.swift */; };
 		BF9C6372240A160100DA740D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C6371240A160100DA740D /* SceneDelegate.swift */; };
@@ -40,6 +40,8 @@
 		BF9C63A92426A7C200DA740D /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C63A82426A7C200DA740D /* ProfileTableViewController.swift */; };
 		BF9C63AB242C5B8A00DA740D /* UsersAroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C63AA242C5B8A00DA740D /* UsersAroundViewController.swift */; };
 		BF9C63AD242DAE9000DA740D /* UserAroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */; };
+		BFC9EF5424AC30AD004FFF1E /* AudioRadarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9EF5324AC30AD004FFF1E /* AudioRadarViewController.swift */; };
+		BFC9EF5624AC3403004FFF1E /* AudioCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9EF5524AC3403004FFF1E /* AudioCard.swift */; };
 		BFE9C374246B9ED1005686BC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */; };
 		BFE9C376246E202D005686BC /* AudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C375246E202D005686BC /* AudioTableViewCell.swift */; };
 		BFE9C38F246FC791005686BC /* DemoMusicPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */; };
@@ -54,13 +56,13 @@
 		BFF276AF2432FB1000E66930 /* Card.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFF276AE2432FB1000E66930 /* Card.xib */; };
 		BFF276B12432FCC000E66930 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF276B02432FCC000E66930 /* Card.swift */; };
 		BFF97E6E243447A90077DC77 /* NewMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF97E6D243447A80077DC77 /* NewMatchTableViewController.swift */; };
-		E1B2A8A9939DB96154C388A5 /* Pods_Hooked.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27574B2968A9AEE7192E861D /* Pods_Hooked.framework */; };
+		D7010309585180051B581633 /* Pods_Hooked.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1888F3EE4CA105B8D866C7 /* Pods_Hooked.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5AB7D50C249D5D7C0098D7F0 /* PBXContainerItemProxy */ = {
+		BF6B25EF249DB03F0076B069 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */;
+			containerPortal = BF6B25EB249DB03E0076B069 /* LNPopupController.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 39DB52E51B5823330061C589;
 			remoteInfo = LNPopupController;
@@ -74,7 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5AB7D50F249D608C0098D7F0 /* LNPopupController.framework in Embed Frameworks */,
+				BF6B25F2249DB04B0076B069 /* LNPopupController.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,14 +84,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		27574B2968A9AEE7192E861D /* Pods_Hooked.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hooked.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNPopupController.xcodeproj; path = "../../../Downloads/LNPopupController-master/LNPopupController/LNPopupController.xcodeproj"; sourceTree = "<group>"; };
-		71132829B377272498B02126 /* Pods-Hooked.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.debug.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.debug.xcconfig"; sourceTree = "<group>"; };
-		987465630227D54604454D34 /* Pods-Hooked.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.release.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.release.xcconfig"; sourceTree = "<group>"; };
+		026B50BF878E7774BA241829 /* Pods-Hooked.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.debug.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.debug.xcconfig"; sourceTree = "<group>"; };
+		40B5453A8C5D6268E98F844C /* Pods-Hooked.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.release.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.release.xcconfig"; sourceTree = "<group>"; };
+		4F1888F3EE4CA105B8D866C7 /* Pods_Hooked.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hooked.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF68912B246665DA00690BDF /* UploadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTableViewController.swift; sourceTree = "<group>"; };
 		BF68912D246668E600690BDF /* AudioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAPI.swift; sourceTree = "<group>"; };
 		BF68912F24666A0B00690BDF /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DemoMusicPlayerController+Extension.swift"; sourceTree = "<group>"; };
+		BF6B25EB249DB03E0076B069 /* LNPopupController.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNPopupController.xcodeproj; path = "../LNPopupController-master/LNPopupController/LNPopupController.xcodeproj"; sourceTree = "<group>"; };
 		BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BF9C636C240A160100DA740D /* Hooked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hooked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9C636F240A160100DA740D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 		BF9C63A82426A7C200DA740D /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		BF9C63AA242C5B8A00DA740D /* UsersAroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAroundViewController.swift; sourceTree = "<group>"; };
 		BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAroundCollectionViewCell.swift; sourceTree = "<group>"; };
+		BFC9EF5324AC30AD004FFF1E /* AudioRadarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRadarViewController.swift; sourceTree = "<group>"; };
+		BFC9EF5524AC3403004FFF1E /* AudioCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioCard.swift; sourceTree = "<group>"; };
 		BFE9C373246B9ED1005686BC /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		BFE9C375246E202D005686BC /* AudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableViewCell.swift; sourceTree = "<group>"; };
 		BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMusicPlayerController.swift; sourceTree = "<group>"; };
@@ -140,26 +144,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1B2A8A9939DB96154C388A5 /* Pods_Hooked.framework in Frameworks */,
-				5AB7D50E249D608C0098D7F0 /* LNPopupController.framework in Frameworks */,
+				BF6B25F1249DB04B0076B069 /* LNPopupController.framework in Frameworks */,
+				D7010309585180051B581633 /* Pods_Hooked.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5AB7D509249D5D7C0098D7F0 /* Products */ = {
+		35208479733945D7676EF306 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		893FBDEAFB97340EB28C8EC4 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				27574B2968A9AEE7192E861D /* Pods_Hooked.framework */,
+				4F1888F3EE4CA105B8D866C7 /* Pods_Hooked.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				BF6B25E32496B0AB0076B069 /* API */,
+				BFC9EF5124A4646F004FFF1E /* Cells */,
 				BF6B25E22496B0840076B069 /* Controller */,
 			);
 			path = References;
@@ -194,14 +191,22 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		BF6B25EC249DB03E0076B069 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF6B25F0249DB03F0076B069 /* LNPopupController.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BF9C6363240A160100DA740D = {
 			isa = PBXGroup;
 			children = (
-				5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */,
+				BF6B25EB249DB03E0076B069 /* LNPopupController.xcodeproj */,
 				BF9C636E240A160100DA740D /* Hooked */,
 				BF9C636D240A160100DA740D /* Products */,
 				DDE3FC04C314C6E6311349FC /* Pods */,
-				893FBDEAFB97340EB28C8EC4 /* Frameworks */,
+				35208479733945D7676EF306 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -233,9 +238,18 @@
 			path = Hooked;
 			sourceTree = "<group>";
 		};
+		BFC9EF5124A4646F004FFF1E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		BFDE1372243AB1A8001456FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BFC9EF5324AC30AD004FFF1E /* AudioRadarViewController.swift */,
 				BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */,
 				BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */,
 				BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */,
@@ -278,7 +292,7 @@
 			children = (
 				BFE9C375246E202D005686BC /* AudioTableViewCell.swift */,
 				BFF276B02432FCC000E66930 /* Card.swift */,
-				BF9C63AC242DAE9000DA740D /* UserAroundCollectionViewCell.swift */,
+				BFC9EF5524AC3403004FFF1E /* AudioCard.swift */,
 				BF9C63A2241441E700DA740D /* UserTableViewCell.swift */,
 			);
 			path = Cells;
@@ -287,8 +301,8 @@
 		DDE3FC04C314C6E6311349FC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				71132829B377272498B02126 /* Pods-Hooked.debug.xcconfig */,
-				987465630227D54604454D34 /* Pods-Hooked.release.xcconfig */,
+				026B50BF878E7774BA241829 /* Pods-Hooked.debug.xcconfig */,
+				40B5453A8C5D6268E98F844C /* Pods-Hooked.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -300,12 +314,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF9C6383240A160200DA740D /* Build configuration list for PBXNativeTarget "Hooked" */;
 			buildPhases = (
-				26C72BEA0555885F681A3162 /* [CP] Check Pods Manifest.lock */,
+				8B42ABBD5884E9F1F62019FE /* [CP] Check Pods Manifest.lock */,
 				BF9C6368240A160100DA740D /* Sources */,
 				BF9C6369240A160100DA740D /* Frameworks */,
 				BF9C636A240A160100DA740D /* Resources */,
-				398D5C33C15F2CFD8EE54011 /* [CP] Embed Pods Frameworks */,
 				BFE9C383246FB0C6005686BC /* Embed Frameworks */,
+				891CF40CE99C1673C9E1FF5B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -345,8 +359,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5AB7D509249D5D7C0098D7F0 /* Products */;
-					ProjectRef = 5AB7D508249D5D7C0098D7F0 /* LNPopupController.xcodeproj */;
+					ProductGroup = BF6B25EC249DB03E0076B069 /* Products */;
+					ProjectRef = BF6B25EB249DB03E0076B069 /* LNPopupController.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -357,11 +371,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5AB7D50D249D5D7C0098D7F0 /* LNPopupController.framework */ = {
+		BF6B25F0249DB03F0076B069 /* LNPopupController.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = LNPopupController.framework;
-			remoteRef = 5AB7D50C249D5D7C0098D7F0 /* PBXContainerItemProxy */;
+			remoteRef = BF6B25EF249DB03F0076B069 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -382,7 +396,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		26C72BEA0555885F681A3162 /* [CP] Check Pods Manifest.lock */ = {
+		891CF40CE99C1673C9E1FF5B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B42ABBD5884E9F1F62019FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,23 +433,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		398D5C33C15F2CFD8EE54011 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hooked/Pods-Hooked-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -442,6 +456,7 @@
 				BFF1C3CE244CBE4C00E99A46 /* Likes.swift in Sources */,
 				BF9C63A124143FB800DA740D /* PeopleTableViewController.swift in Sources */,
 				BF9C637A240A160100DA740D /* Hooked.xcdatamodeld in Sources */,
+				BFC9EF5624AC3403004FFF1E /* AudioCard.swift in Sources */,
 				BFE9C376246E202D005686BC /* AudioTableViewCell.swift in Sources */,
 				BFEA9659245BD02D00A43DDD /* MessageAPI.swift in Sources */,
 				BF9C63AB242C5B8A00DA740D /* UsersAroundViewController.swift in Sources */,
@@ -468,6 +483,7 @@
 				BFEA9653245BCDEE00A43DDD /* ChatViewController.swift in Sources */,
 				BFEA9655245BCEB200A43DDD /* ChatViewController+Extension.swift in Sources */,
 				BFF1C3CA2449546800E99A46 /* PreferenceTableViewController.swift in Sources */,
+				BFC9EF5424AC30AD004FFF1E /* AudioRadarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +547,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -590,7 +606,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -609,7 +625,7 @@
 		};
 		BF9C6384240A160200DA740D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71132829B377272498B02126 /* Pods-Hooked.debug.xcconfig */;
+			baseConfigurationReference = 026B50BF878E7774BA241829 /* Pods-Hooked.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -632,7 +648,7 @@
 		};
 		BF9C6385240A160200DA740D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 987465630227D54604454D34 /* Pods-Hooked.release.xcconfig */;
+			baseConfigurationReference = 40B5453A8C5D6268E98F844C /* Pods-Hooked.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

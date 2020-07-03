@@ -48,11 +48,10 @@ let IDENTIFIER_DETAIL = "DetailViewController"
 let IDENTIFIER_RADAR = "RadarViewController"
 let IDENTIFIER_NEW_MATCH = "NewMatchTableViewController"
 let REF_ACTION = "action"
+
+let REF_AUDIO_ACTION = "audioAction"
+
 let REF_LIKES = "likes"
-
-
-
-
 
 
 
@@ -84,13 +83,28 @@ class Ref {
         return databaseRoot.child(REF_GEO)
     }
     
+    
+    //For the user based likes
     var databaseAction: DatabaseReference {
         return databaseRoot.child(REF_ACTION)
     }
     
     func databaseActionForUser(uid: String) -> DatabaseReference {
-          return databaseAction.child(uid)
-      }
+        return databaseAction.child(uid)
+    }
+    
+    
+    //Copy of the user driven likes substiting for audio
+    var databaseAudioAction: DatabaseReference {
+        return databaseRoot.child(REF_AUDIO_ACTION)
+    }
+    
+    func databaseActionForAudio(uid: String) -> DatabaseReference {
+        return databaseAudioAction.child(uid)
+    }
+    
+    
+    
     
     //adding in the new tables for just likes
     var databaseLikes: DatabaseReference {
@@ -101,8 +115,31 @@ class Ref {
            return databaseLikes.child(uid)
     }
     
+
+    //Uploading just audio files
+    var databaseAudio: DatabaseReference {
+        return databaseRoot.child(REF_AUDIO)
+    }
+    
+    func databaseAudioArtist(artist: String) -> DatabaseReference {
+        return databaseAudio.child(artist)
+    }
+    
+    var storageAudio: StorageReference {
+        return storageRoot.child(REF_AUDIO)
+    }
+    
+    func storageSpecificAudio(id: String) -> StorageReference {
+        print("from final audio")
+        return storageAudio.child(id)
+    }
     
     
+    
+
+    
+    
+    //These are for training. I do not actually use these in the MVP
     var databaseMessage: DatabaseReference {
         return databaseRoot.child(REF_MESSAGE)
     }
@@ -126,25 +163,6 @@ class Ref {
     
     func storageSpecificAudioMessage(id: String) -> StorageReference {
         return storageMessage.child("audio").child(id)
-    }
-    
-    
-    //Uploading just audio files
-    var databaseAudio: DatabaseReference {
-        return databaseRoot.child(REF_AUDIO)
-    }
-    
-    func databaseAudioArtist(artist: String) -> DatabaseReference {
-        return databaseAudio.child(artist)
-    }
-    
-    var storageAudio: StorageReference {
-        return storageRoot.child(REF_AUDIO)
-    }
-    
-    func storageSpecificAudio(id: String) -> StorageReference {
-        print("from final audio")
-        return storageAudio.child(id)
     }
 }
 

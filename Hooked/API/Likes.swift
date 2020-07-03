@@ -20,6 +20,7 @@ class Likes {
         self.like = like
 
     }
+    
 /*
     //The method that excepts the dictionary and turns it into the users varaible
     static func transformUser(dict: [String: Any]) -> Like? {

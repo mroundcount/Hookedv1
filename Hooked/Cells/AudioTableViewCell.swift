@@ -42,6 +42,7 @@ class AudioTableViewCell: UITableViewCell {
         }
         
         //We'll do test styling in here too
+        //Time stamp from how long ago the audio file was uploaded
         let date = Date(timeIntervalSince1970: audio.date)
         let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
         dataLbl.text = dateString
@@ -50,7 +51,6 @@ class AudioTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
 }

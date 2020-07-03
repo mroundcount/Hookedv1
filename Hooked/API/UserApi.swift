@@ -15,10 +15,13 @@ import ProgressHUD
 //All methods of the user business services (create user, sign in, etc.)
 class UserApi {
     
+    //returns the user ID of the user logged in
     var currentUserId: String {
         return Auth.auth().currentUser != nil ? Auth.auth().currentUser!.uid : ""
     }
     
+    
+    //signs in based on an email address and password. I would like to change this to username, but this seemed to be built into the Auth
     func signIn(email: String, password: String, onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         //This is specifically for email and password. There are other built in tools in Auth
         Auth.auth().signIn(withEmail: email, password: password) {
@@ -73,12 +76,12 @@ class UserApi {
                 }, onError: { (errorMessage) in
                     onError(errorMessage)
                 })
-                
             }
         }
     }
     
-    //saving the pushing up the dictionary from the profile view controller
+    
+    //Saving the pushing up the dictionary from the profile view controller. This is called when the user updates their profile.
     func saveUserProfile(dict: Dictionary<String, Any>,  onSuccess: @escaping() -> Void, onError: @escaping(_ errorMessage: String) -> Void) {
         //make sure the data is being updated for the current user.
         Ref().databaseSpecificUser(uid: Api.User.currentUserId).updateChildValues(dict) { (error, dataRef) in
@@ -102,6 +105,7 @@ class UserApi {
         }
     }
     
+    
     func logOut() {
         //user the built in FirebaseAuth functions
         do {
@@ -114,7 +118,7 @@ class UserApi {
         (UIApplication.shared.delegate as! AppDelegate).configureInitialViewController()
     }
     
-    //This might have been removed
+    //Used all over the place.
     func observeUsers(onSuccess: @escaping(UserCompletion)) {
         //returns a snapshot of each user. We can also listed for children added, this way it can be added to the snapshot, so we don't have to reload it all the time
         Ref().databaseUsers.observe(.childAdded) { (snapshot) in
@@ -126,16 +130,6 @@ class UserApi {
                     onSuccess(user)
                 }
             }
-        }
-    }
-    
-    func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
-        guard let dict = snapshot.value as? [String: Bool] else { return }
-        dict.forEach({ (key, value) in
-            self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
-                onSuccess(user)
-            })
-        })
         }
     }
     
@@ -151,6 +145,9 @@ class UserApi {
         }
     }
     
+    //Returns all users that the current user has liked
+    //'action' record whether or not the user was liked (Boolean)
+    //used in the radar view controller
     func observeAction(onSuccess: @escaping(UserCompletion)) {
         Ref().databaseRoot.child("action").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Bool] else { return }
@@ -162,6 +159,7 @@ class UserApi {
         }
     }
     
+
     
     //For data that only needs to be changed one or infrequently (ie profile photos)
     //prevents cetrain loadings from happening multiple times like when we changed the profile photo in video 50
@@ -176,7 +174,7 @@ class UserApi {
         }
     }
     
-    //found this in vido 49... need ot find out when it was created.
+    //allows up to return the user info of which ever user we pass into the uid aregument.
     func getUserInfo(uid: String, onSuccess: @escaping(UserCompletion)) {
         let ref = Ref().databaseSpecificUser(uid: uid)
         ref.observe(.value) { (snapshot) in
@@ -187,6 +185,19 @@ class UserApi {
             }
         }
     }
+    
+    
+    //This observation method is used on to observe the match table
+    func observeNewMatch(onSuccess: @escaping(UserCompletion)) {    Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).observeSingleEvent(of: .value) { (snapshot) in
+        guard let dict = snapshot.value as? [String: Bool] else { return }
+        dict.forEach({ (key, value) in
+            self.getUserInforSingleEvent(uid: key, onSuccess: { (user) in
+                onSuccess(user)
+            })
+        })
+        }
+    }
+    
     
 }
 //in the api call the observeUsers functions can accept multiple closure arements. Be declaring typealias the alias name can be used anywhere in the app instead of the type. THe name reffers to an already existing type

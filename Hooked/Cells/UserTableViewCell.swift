@@ -30,13 +30,11 @@ class UserTableViewCell: UITableViewCell {
         avatar.clipsToBounds = true
         avatar.contentMode = . scaleAspectFill
     }
+    
     //Refer to the userAPI
     func loadData(_ user: User) {
-        
-        
         self.user = user
         //self.ageLbl.text = user.username
-        
         self.usernameLbl.text = user.username
         self.statusLbl.text = user.status
         //passing the url to the method
@@ -45,8 +43,6 @@ class UserTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
 }

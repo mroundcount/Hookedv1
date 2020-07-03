@@ -12,5 +12,6 @@ struct Api {
     //We will put all business logic and methods of the user business services (create user, sign in, etc.)
     static var User = UserApi()
     static var Audio = AudioApi()
+    //Message is an old API I used for testing. No practical use for MVP
     static var Message = MessageApi()
 }

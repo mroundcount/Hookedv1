@@ -9,7 +9,7 @@
 import Foundation
 import SDWebImage
 
-
+//Feature for chat in lecture series.... no use in MVP
 extension String {
     func estimateFrameForText(_ text: String) -> CGRect {
         let size = CGSize(width: 250, height: 1000)
@@ -18,6 +18,7 @@ extension String {
     }
 }
 
+//Used to time stamp how long ago the audio was uploaded in the audio cells.
 func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> String {
     let calendar = Calendar.current
     let now = currentDate
@@ -61,7 +62,7 @@ func timeAgoSinceDate(_ date:Date, currentDate:Date, numericDates:Bool) -> Strin
 }
 
 
-//This is for the design of the like and nope label
+//This is for the design of the 'like' and nope label
 extension UILabel {
     func addCharacterSpacing(kernValue: Double = 3) {
         if let labelText = text, labelText.count > 0 {
@@ -71,6 +72,7 @@ extension UILabel {
         }
     }
 }
+
 //loading the card view in the nib file via it's class name (card) so load the card.xib file and return an instance of card
 extension UIView {
     class func fromNib<T: UIView>() -> T {
@@ -96,7 +98,7 @@ extension UIImageView {
     }
 }
 
-
+//Background for profile pictures
 extension UIImageView {
     func addBlackGradientLayer(frame: CGRect, colors:[UIColor]){
         let gradient = CAGradientLayer()
