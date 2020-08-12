@@ -96,9 +96,7 @@ class DemoMusicPlayerController: UIViewController, AVAudioPlayerDelegate {
         pauseBtn = UIBarButtonItem(image: UIImage(named: "pause"), style: .plain, target: self, action: #selector(pauseAction))
         playBtn = UIBarButtonItem(image: UIImage(named: "play"), style: .plain, target: self, action: #selector(playAction))
         closeBtn = UIBarButtonItem(image: UIImage(named: "close-1"), style: .plain, target: self, action: #selector(closeAction))
-        //End
         popupItem.rightBarButtonItems = [ pauseBtn, closeBtn ]
-        
         //Trying to get the progress bar to appear
         self.popupBar.progressViewStyle = LNPopupBarProgressViewStyle.bottom
         

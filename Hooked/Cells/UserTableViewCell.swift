@@ -32,7 +32,7 @@ class UserTableViewCell: UITableViewCell {
     }
     
     //Refer to the userAPI
-    func loadData(_ user: User) {
+    func loadData(_ user: User) { 
         self.user = user
         //self.ageLbl.text = user.username
         self.usernameLbl.text = user.username

@@ -9,6 +9,9 @@
 import UIKit
 import LNPopupController
 import AVFoundation
+import Foundation
+import Firebase
+import FirebaseDatabase
 
 class UserProfileViewController: UIViewController {
     
@@ -124,19 +127,12 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! AudioTableViewCell
         print(cell.audio.title)
-        
-        if audioPlayer != nil {
-            if audioPlayer.isPlaying {
-                print("caught ya 2")
-                //audioPlayer.stop()
-            } else {
-                print("OOOOOOOOOOOPPPPPS")
-            }
-        }
-        
-        
+
         popupContentController.songTitle = cell.audio.title
-        popupContentController.artistName = cell.audio.artist
+        
+        Api.User.getUserInforSingleEvent(uid: cell.audio.artist) { (user) in
+            self.popupContentController.artistName = user.username
+        }
 
         popupContentController.downloadFile(audio: audio[indexPath.row])
 
@@ -165,9 +161,33 @@ extension UserProfileViewController: UITableViewDataSource, UITableViewDelegate 
         //copy this and add the variables in the return with "delete
         let delete = UITableViewRowAction(style: .normal, title: "      Delete     ") { action, index in
             let cell = tableView.cellForRow(at: editActionsForRowAt) as? AudioTableViewCell
-            print("Removed \(cell?.audio.title)")
+            print("Removing \(cell?.audio.id) which is titled \(cell?.audio.title)")
+            
+            //FirebaseManager.shared.removePost(withID: (cell?.audio.id)!)
+            
+            let shared = FirebaseManager()
+            //let reference = Database.database().reference()
+            let selection = cell?.audio.id
+            
+            let reference = Ref().databaseAudioArtist(artist: Api.User.currentUserId).child(selection!)
+            print("Reference from deletion: \(reference)")
+            //Test making the error optional
+            reference.removeValue { error, _ in
+                print(error?.localizedDescription)
+            }
         }
         delete.backgroundColor = .red
         return [delete]
     }
+    
+    //Just in case
+    /*
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if(indexPath.section == 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+     */
 }

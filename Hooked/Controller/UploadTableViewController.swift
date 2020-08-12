@@ -147,16 +147,16 @@ extension UploadTableViewController: UIDocumentPickerDelegate {
     }
     
     func sendToFirebase(dict: Dictionary<String, Any>) {
-        
         let date: Double = Date().timeIntervalSince1970
         var value = dict
                 
         value["artist"] = Api.User.currentUserId
-        value["artistName"] = username
         value["date"] = date
         value["read"] = true
         value["title"] = titleTextField.text
         value["genre"] = genreLbl.text
         Api.Audio.uploadAudio(artist: Api.User.currentUserId, value: value)
+        Api.Audio.uploadAudioFile(value: value)
     }
 }
+

@@ -30,38 +30,25 @@ class NewMatchTableViewController: UITableViewController, UISearchResultsUpdatin
         navigationItem.title = "Liked Artists"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        /*
-         The following code is for set up the navigations to test pages that are not usable for a published application
-         
+         //The following code is for set up the navigations to test pages that are not usable for a published application
          let location = UIBarButtonItem(image: UIImage(named: "icon-location"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(locationDidTapped))
          navigationItem.leftBarButtonItem = location
          
-         let chat = UIBarButtonItem(image: UIImage(named: "mic"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(chatDidTapped))
-         navigationItem.rightBarButtonItem = chat
-         
-         let match = UIBarButtonItem(image: UIImage(named: "icon-radar"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(matchDidTapped))
-         //navigationItem.rightBarButtonItem = match
-         */
+        let match = UIBarButtonItem(image: UIImage(named: "icon-radar"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(matchDidTapped))
+         navigationItem.rightBarButtonItem = match
     }
-    /*
      @objc func locationDidTapped() {
      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_USER_AROUND) as! UsersAroundViewController
-     self.navigationController?.pushViewController(usersAroundVC, animated: true)
-     }
-     
-     @objc func chatDidTapped() {
-     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_CHAT) as! ChatViewController
+     let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_LIKES) as! LikesTableViewController
      self.navigationController?.pushViewController(usersAroundVC, animated: true)
      }
      
      @objc func matchDidTapped() {
      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_PEOPLE) as! PeopleTableViewController
+     let usersAroundVC = storyboard.instantiateViewController(withIdentifier: IDENTIFIER_AUDIO_RADAR) as! AudioRadarViewController
      self.navigationController?.pushViewController(usersAroundVC, animated: true)
      }
-     */
+     
     func setupSearchBarController() {
         //front end characterists of the searchbar
         searchController.searchResultsUpdater = self

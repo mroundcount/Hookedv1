@@ -13,7 +13,12 @@ import Firebase
 //All of our firebase related references. We'll assign one for every node. This was we do not have to hardcode elsewhere
 let REF_USER = "users"
 let REF_MESSAGE = "messages"
+
+
+//Artist heiarchy
 let REF_AUDIO = "audio"
+let REF_AUDIO_FILE = "audioFiles"
+
 
 let URL_STORAGE_ROOT = "gs://hooked-217d3.appspot.com"
 let STORAGE_PROFILE = "profile"
@@ -46,7 +51,13 @@ let REF_GEO = "Geolocs"
 let IDENTIFIER_DETAIL = "DetailViewController"
 
 let IDENTIFIER_RADAR = "RadarViewController"
+let IDENTIFIER_AUDIO_RADAR = "AudioRadarViewController"
+
+
 let IDENTIFIER_NEW_MATCH = "NewMatchTableViewController"
+let IDENTIFIER_LIKES = "LikesTableViewController"
+
+
 let REF_ACTION = "action"
 
 let REF_AUDIO_ACTION = "audioAction"
@@ -70,6 +81,7 @@ class Ref {
     //StorageRoot that is stored in a global variable
     let storageRoot = Storage.storage().reference(forURL: URL_STORAGE_ROOT)
     //the child class in the firebase url
+    
     var storageProfile: StorageReference {
         return storageRoot.child(STORAGE_PROFILE)
     }
@@ -93,16 +105,7 @@ class Ref {
         return databaseAction.child(uid)
     }
     
-    
-    //Copy of the user driven likes substiting for audio
-    var databaseAudioAction: DatabaseReference {
-        return databaseRoot.child(REF_AUDIO_ACTION)
-    }
-    
-    func databaseActionForAudio(uid: String) -> DatabaseReference {
-        return databaseAudioAction.child(uid)
-    }
-    
+
     
     
     
@@ -116,7 +119,12 @@ class Ref {
     }
     
 
-    //Uploading just audio files
+    
+    
+    
+    
+    
+    //Uploading just audio in artist heiarchy
     var databaseAudio: DatabaseReference {
         return databaseRoot.child(REF_AUDIO)
     }
@@ -125,6 +133,12 @@ class Ref {
         return databaseAudio.child(artist)
     }
     
+    //Uploading JUST audio files
+    func databaseAudioFileOnly() -> DatabaseReference {
+        return databaseRoot.child(REF_AUDIO_FILE)
+    }
+  
+    //Need this for both
     var storageAudio: StorageReference {
         return storageRoot.child(REF_AUDIO)
     }
@@ -133,6 +147,11 @@ class Ref {
         print("from final audio")
         return storageAudio.child(id)
     }
+    
+    //Used to return audio IDs from the liked database
+    func databaseSpecificAudio(id: String) -> DatabaseReference {
+        return databaseAudioFileOnly().child(id)
+     }
     
     
     

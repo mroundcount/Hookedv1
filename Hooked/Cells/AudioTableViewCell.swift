@@ -46,7 +46,6 @@ class AudioTableViewCell: UITableViewCell {
         let date = Date(timeIntervalSince1970: audio.date)
         let dateString = timeAgoSinceDate(date, currentDate: Date(), numericDates: true)
         dataLbl.text = dateString
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF633AE724CFE78200B2BCB1 /* AudioCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF633AE524CFE78100B2BCB1 /* AudioCard.xib */; };
+		BF633AE924D139CD00B2BCB1 /* LikesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF633AE824D139CD00B2BCB1 /* LikesTableViewController.swift */; };
+		BF633AEB24D2500900B2BCB1 /* LikesAudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF633AEA24D2500900B2BCB1 /* LikesAudioTableViewCell.swift */; };
+		BF633AED24DF431400B2BCB1 /* AudioRadarViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF633AEC24DF431300B2BCB1 /* AudioRadarViewController + Extension.swift */; };
 		BF68912C246665DA00690BDF /* UploadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912B246665DA00690BDF /* UploadTableViewController.swift */; };
 		BF68912E246668E600690BDF /* AudioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912D246668E600690BDF /* AudioAPI.swift */; };
 		BF68913024666A0B00690BDF /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF68912F24666A0B00690BDF /* Audio.swift */; };
@@ -87,6 +91,10 @@
 		026B50BF878E7774BA241829 /* Pods-Hooked.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.debug.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.debug.xcconfig"; sourceTree = "<group>"; };
 		40B5453A8C5D6268E98F844C /* Pods-Hooked.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hooked.release.xcconfig"; path = "Target Support Files/Pods-Hooked/Pods-Hooked.release.xcconfig"; sourceTree = "<group>"; };
 		4F1888F3EE4CA105B8D866C7 /* Pods_Hooked.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hooked.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF633AE524CFE78100B2BCB1 /* AudioCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AudioCard.xib; path = Hooked/AudioCard.xib; sourceTree = SOURCE_ROOT; };
+		BF633AE824D139CD00B2BCB1 /* LikesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesTableViewController.swift; sourceTree = "<group>"; };
+		BF633AEA24D2500900B2BCB1 /* LikesAudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesAudioTableViewCell.swift; sourceTree = "<group>"; };
+		BF633AEC24DF431300B2BCB1 /* AudioRadarViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioRadarViewController + Extension.swift"; sourceTree = "<group>"; };
 		BF68912B246665DA00690BDF /* UploadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTableViewController.swift; sourceTree = "<group>"; };
 		BF68912D246668E600690BDF /* AudioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAPI.swift; sourceTree = "<group>"; };
 		BF68912F24666A0B00690BDF /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -228,6 +236,7 @@
 				BFDE1373243AB288001456FD /* API */,
 				BFDE1374243AB2BD001456FD /* Cells */,
 				BFDE1372243AB1A8001456FD /* Controller */,
+				BF633AE524CFE78100B2BCB1 /* AudioCard.xib */,
 				BFF276AE2432FB1000E66930 /* Card.xib */,
 				BF9C637B240A160200DA740D /* Assets.xcassets */,
 				BF9C637D240A160200DA740D /* LaunchScreen.storyboard */,
@@ -250,11 +259,13 @@
 			isa = PBXGroup;
 			children = (
 				BFC9EF5324AC30AD004FFF1E /* AudioRadarViewController.swift */,
+				BF633AEC24DF431300B2BCB1 /* AudioRadarViewController + Extension.swift */,
 				BFE9C38E246FC791005686BC /* DemoMusicPlayerController.swift */,
 				BF6B25DE2478C6680076B069 /* DemoMusicPlayerController+Extension.swift */,
 				BF82D24D242FF4ED00C90CDA /* DetailViewController.swift */,
 				BF9C6390240AFA9600DA740D /* ForgotPasswordViewController.swift */,
 				BF9C6392240AFAAE00DA740D /* ForgotPasswordViewController+UI.swift */,
+				BF633AE824D139CD00B2BCB1 /* LikesTableViewController.swift */,
 				BFF97E6D243447A80077DC77 /* NewMatchTableViewController.swift */,
 				BFF1C3C92449546800E99A46 /* PreferenceTableViewController.swift */,
 				BF9C63A82426A7C200DA740D /* ProfileTableViewController.swift */,
@@ -290,9 +301,10 @@
 		BFDE1374243AB2BD001456FD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BFC9EF5524AC3403004FFF1E /* AudioCard.swift */,
 				BFE9C375246E202D005686BC /* AudioTableViewCell.swift */,
 				BFF276B02432FCC000E66930 /* Card.swift */,
-				BFC9EF5524AC3403004FFF1E /* AudioCard.swift */,
+				BF633AEA24D2500900B2BCB1 /* LikesAudioTableViewCell.swift */,
 				BF9C63A2241441E700DA740D /* UserTableViewCell.swift */,
 			);
 			path = Cells;
@@ -389,6 +401,7 @@
 				BFF276AF2432FB1000E66930 /* Card.xib in Resources */,
 				BF9C6395240C3A5600DA740D /* GoogleService-Info.plist in Resources */,
 				BF9C637C240A160200DA740D /* Assets.xcassets in Resources */,
+				BF633AE724CFE78200B2BCB1 /* AudioCard.xib in Resources */,
 				BF9C6377240A160100DA740D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,14 +488,17 @@
 				BFF276AD2432F32C00E66930 /* RadarViewController.swift in Sources */,
 				BF9C63992413522D00DA740D /* UserApi.swift in Sources */,
 				BF9C63A72414A09A00DA740D /* Extension.swift in Sources */,
+				BF633AEB24D2500900B2BCB1 /* LikesAudioTableViewCell.swift in Sources */,
 				BF9C6372240A160100DA740D /* SceneDelegate.swift in Sources */,
 				BFE9C38F246FC791005686BC /* DemoMusicPlayerController.swift in Sources */,
 				BF9C639B241361AE00DA740D /* StorageService.swift in Sources */,
 				BF9C639D2413674300DA740D /* Ref.swift in Sources */,
 				BF9C63A5241493D900DA740D /* User.swift in Sources */,
+				BF633AE924D139CD00B2BCB1 /* LikesTableViewController.swift in Sources */,
 				BFEA9653245BCDEE00A43DDD /* ChatViewController.swift in Sources */,
 				BFEA9655245BCEB200A43DDD /* ChatViewController+Extension.swift in Sources */,
 				BFF1C3CA2449546800E99A46 /* PreferenceTableViewController.swift in Sources */,
+				BF633AED24DF431400B2BCB1 /* AudioRadarViewController + Extension.swift in Sources */,
 				BFC9EF5424AC30AD004FFF1E /* AudioRadarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -129,16 +129,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! AudioTableViewCell
         print(cell.audio.title)
-        
-        if audioPlayer != nil {
-            if audioPlayer.isPlaying {
-                print("caught ya 2")
-                //audioPlayer.stop()
-            } else {
-                print("OOOOOOOOOOOPPPPPS")
-            }
-        }
-        
+                
         popupContentController.songTitle = cell.audio.title
         popupContentController.artistName = cell.audio.artist
 

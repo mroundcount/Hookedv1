@@ -31,8 +31,8 @@ class StorageService {
                 if let metaAudioUrl = audioUrl?.absoluteString {
                     let dict: Dictionary<String, Any> = [
                         "audioUrl": metaAudioUrl as Any,
-                        "height": 720,
-                        "width": 1280
+                        //"height": 720,
+                        //"width": 1280
                     ]
                     onSuccess(dict)
                 }

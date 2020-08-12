@@ -6,32 +6,34 @@
 //  Copyright © 2020 Michael Roundcount. All rights reserved.
 //
 
-
-/*
-
 import UIKit
 import GeoFire
 import CoreLocation
 import FirebaseDatabase
 import ProgressHUD
 
+import AVFoundation
+import AVKit
+
 class AudioRadarViewController: UIViewController {
     
     var myQuery: GFQuery!
     var queryHandle: DatabaseHandle?
-    var users: [User] = []
-    //added
-    var audio: [Audio] = []
-    //modified
-    var audioCards: [AudioCard] = []
-    var cards: [Card] = []
-    var likes = [String]()
     
-    var allUsers = [String]()
-    var final = [String]()
+    //added
+    var audioCollection: [Audio] = []
+    var likesCollection: [Audio] = []
+    var cards: [AudioCard] = []
+
+    //var likes = [String]()
+    
     //detecting the position of the card at it's inital position
     var cardInitialLocationCenter: CGPoint!
     var panInitialLocation: CGPoint!
+    
+    var audio: Audio!
+    var audioPlayer: AVAudioPlayer!
+    var audioPath: URL!
     
     @IBOutlet weak var cardStack: UIView!
     @IBOutlet weak var refreshImg: UIImageView!
@@ -44,8 +46,8 @@ class AudioRadarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.findUsers()
-        //Roundcount added
+        self.findAudioFiles()
+        
         
         title = "Hooked"
         //configureLocationManager()
@@ -59,44 +61,99 @@ class AudioRadarViewController: UIViewController {
         
         let newMatchItem = UIBarButtonItem(image: UIImage(named: "icon-chat"), style: UIBarButtonItem.Style.plain, target: self, action: #selector(newMatchItemDidTap))
         self.navigationItem.rightBarButtonItem = newMatchItem
-        
-        findAction()
-        //print(users)
+
     }
     
-    //copying the function from the people around view controller. May update this later once we can get the observation fixed
-        
-    func findAction() {
-        Api.User.observeAction { (user) in
-            //self.users.removeAll()
-            self.users.append(user)
-            self.setupCard(user: user)
-            print("action database:",user.username)
-            Ref().databaseRoot.child("action").child(Api.User.currentUserId).updateChildValues([user.uid: true])
-            return
+    func findAudioFiles () {
+        Api.Audio.observeAudio { (results) in
+            self.audioCollection.append(results)
+            //self.setupCard(audio: audio)
+            //print("AudioCards being displayed \(results.title) by: \(results.artist)")
         }
-        
-        
-        
-        
+
+        Api.Audio.observeNewLike { (likedAudio) in
+            self.likesCollection.append(likedAudio)
+            //self.tableView.reloadData()
+            //print("Audio to remove... \(likedAudio.title)")
+            
+            for likedAudio in self.likesCollection
+            {
+                let audio = self.audioCollection.filter({ $0.id != likedAudio.id })
+                
+                for audio in audio {
+                    //print("final audio list: \(audio.title)")
+                    self.setupCard(audio: audio)
+                }
+            }
+        }
     }
     
+    //saving the true of false to the current user logged in
+    func saveToFirebase(like: Bool, card: AudioCard) {
+        Ref().databaseActionForUser(uid: Api.User.currentUserId)
+            .updateChildValues([card.audio.id: like]) { (error, ref) in
+                if error == nil, like == true {
+                    // check if match { send push notificaiton }
+                    //self.checkIfMatchFor(card: card)
+                }
+        }
+    }
     
-    func findUsers () {
+    //saving only true like values to the firebase so can can just view them in a liked page.
+    func saveLikesToFirebase(like: Bool, card: AudioCard) {
+        Ref().databaseLikesForUser(uid: Api.User.currentUserId)
+            .updateChildValues([card.audio.id: like]) { (error, ref) in
+                if error == nil, like == true {
+                }
+        }
+    }
+    
+    //move to the next card in the array
+    func updateCards(card: AudioCard) {
         
-         Api.User.observeNewLike { (user) in
-         self.users.append(user)
-         }
         
-        Api.User.observeUsers { (user) in
-            //self.users.removeAll()
-            self.users.append(user)
-            self.setupCard(user: user)
-            //print(user.username)
-            return
+       
+        
+        //use enumderated method to this
+        for (index, c) in self.cards.enumerated() {
+          
+            if c.audio.id == card.audio.id {
+                self.cards.remove(at: index)
+                self.audioCollection.remove(at: index)
+            }
+            
+        }
+        setupGestures()
+        if cards.count == 1 {
+            print("Playing the friggen 3 \(audio.title)")
+        }
+        //setupTransforms()
+    }
+    
+    //confifure the card frame and pass in the user parameter and append it to the card array
+    func setupCard(audio: Audio) {
+        let card: AudioCard = UIView.fromNib()
+        card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
+        card.audio = audio
+        //passing the radar controller to the card object
+        card.controller = self
+        cards.append(card)
+        //append the stack view of arrays
+        cardStack.addSubview(card)
+        cardStack.sendSubviewToBack(card)
+        //allows us to see the full stack of the cards.
+        //setupTransforms()
+                
+        //make sure that only the top card is being interacted with
+        if cards.count == 1 {
+            cardInitialLocationCenter = card.center
+            print("Playing the friggen 3 \(audio.title)")
+            downloadFile(audio: audio)
+            card.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
         }
         
-        
+        //print("Playing the friggen 5 \(audio.title)")
+        //downloadFile(audio: audio)
     }
     
     @objc func newMatchItemDidTap() {
@@ -130,42 +187,6 @@ class AudioRadarViewController: UIViewController {
         //self.setupTransforms()
     }
     
-    //saving the true of false to the current user logged in
-    func saveToFirebase(like: Bool, card: Card) {
-        Ref().databaseActionForUser(uid: Api.User.currentUserId)
-            .updateChildValues([card.user.uid: like]) { (error, ref) in
-                if error == nil, like == true {
-                    // check if match { send push notificaiton }
-                    self.checkIfMatchFor(card: card)
-                }
-        }
-    }
-    
-    //saving only true like values to the firebase so can can just view them in a liked page.
-    func saveLikesToFirebase(like: Bool, card: Card) {
-        Ref().databaseLikesForUser(uid: Api.User.currentUserId)
-            .updateChildValues([card.user.uid: like]) { (error, ref) in
-                if error == nil, like == true {
-                }
-        }
-    }
-    
-    //looking for a match checked by userID
-    func checkIfMatchFor(card: Card) {
-        //pull all the swiping information on the card userID
-        Ref().databaseActionForUser(uid: card.user.uid).observeSingleEvent(of: .value) { (snapshot) in
-            //looking if this card contains the true value for the current userID
-            guard let dict = snapshot.value as? [String: Bool] else { return }
-            //logic for checking if both users like each other.
-            //looking if the user logged in also has a liked value from the user on the card
-            if dict.keys.contains(Api.User.currentUserId), dict[Api.User.currentUserId] == true {
-                Ref().databaseRoot.child("newMatch").child(Api.User.currentUserId).updateChildValues([card.user.uid: true])
-                Ref().databaseRoot.child("newMatch").child(card.user.uid).updateChildValues([Api.User.currentUserId: true])
-                
-            }
-        }
-    }
-    
     //actual animation for swiping
     func swipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
@@ -184,11 +205,13 @@ class AudioRadarViewController: UIViewController {
         }
         //take the card out of the array once it has been moved
         for (index, c) in self.cards.enumerated() {
-            if c.user.uid == firstCard.user.uid {
+            if c.audio.id == firstCard.audio.id {
                 self.cards.remove(at: index)
-                self.users.remove(at: index)
+                self.audioCollection.remove(at: index)
             }
         }
+        
+        
         //sets up the pan gesture if you use the button instead of the swipe gesture
         self.setupGestures()
         
@@ -215,30 +238,9 @@ class AudioRadarViewController: UIViewController {
         //tabBarController?.tabBar.isHidden = false
     }
     
-    //confifure the card frame and pass in the user parameter and append it to the card array
-    func setupCard(user: User) {
-        let card: Card = UIView.fromNib()
-        card.frame = CGRect(x: 0, y: 0, width: cardStack.bounds.width, height: cardStack.bounds.height)
-        card.user = user
-        //passing the radar controller to the card object
-        card.controller = self
-        cards.append(card)
-        //append the stack view of arrays
-        cardStack.addSubview(card)
-        cardStack.sendSubviewToBack(card)
-        //allows us to see the full stack of the cards.
-        //setupTransforms()
-        
-        //make sure that only the top card is being interacted with
-        if cards.count == 1 {
-            cardInitialLocationCenter = card.center
-            card.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
-        }
-        
-    }
     //all the responsibility of moving the card view is on this pan gesture
     @objc func pan(gesture: UIPanGestureRecognizer) {
-        let card = gesture.view! as! Card
+        let card = gesture.view! as! AudioCard
         //cg point value so we know where the card is being swiped
         let translation = gesture.translation(in: cardStack)
         
@@ -313,19 +315,6 @@ class AudioRadarViewController: UIViewController {
             break
         }
     }
-    //move to the next card in the array
-    func updateCards(card: Card) {
-        //use enumderated method to this
-        for (index, c) in self.cards.enumerated() {
-            if c.user.uid == card.user.uid {
-                self.cards.remove(at: index)
-                self.users.remove(at: index)
-            }
-        }
-        
-        setupGestures()
-        //setupTransforms()
-    }
     
     //adding the pan gesture to the next card in the array
     func setupGestures() {
@@ -338,6 +327,9 @@ class AudioRadarViewController: UIViewController {
         
         if let firstCard = cards.first {
             firstCard.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(pan(gesture:))))
+            
+            print("Playing the friggen 7: \(String(describing: cards.first?.audio.title))")
+            downloadFile(audio: (cards.first?.audio)!)
         }
     }
     
@@ -369,19 +361,5 @@ class AudioRadarViewController: UIViewController {
             card.transform = transform
         }
     }
-    
-    /*
-     func observeLikedUsers() {
-     self.users.removeAll()
-     //returns all users in the "likes" database.
-     Api.User.observeNewLike { (user) in
-     self.users.append(user)
-     //print("liked users: ",user.username)
-     self.likes.append(user.username)
-     print("already liked users:",self.likes)
-     }
-     }
-     */
 }
 
-*/
